@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Bas.Sphere.CloudLayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             x:Name="UserControl"
+             d:DesignHeight="480" d:DesignWidth="480">
+    <Grid>
+    <Image x:Name="CloudImage" Source="CloudLayer.png" RenderTransformOrigin="0.5,0.5">
+        <Image.RenderTransform>
+            <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
+        </Image.RenderTransform>
+    </Image>
+    <StackPanel Background="#AAFFFFFF" Height="100" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="CurrentSpeed:" />
+                <TextBlock Text="{Binding CurrentSpeed, ElementName=UserControl}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

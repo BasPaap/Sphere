@@ -1,8 +1,8 @@
-﻿<Window x:Class="Sphere.MainWindow"
+﻿<Window x:Class="Bas.Sphere.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
-        xmlns:local="clr-namespace:Sphere"
+        xmlns:local="clr-namespace:Bas.Sphere"
         SizeToContent="WidthAndHeight"
         Background="Black"
         Title="MainWindow">
@@ -17,12 +17,23 @@
             <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="1.0" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="1.5" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
         </Grid>
+
+        <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"/>
         
         <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
         
             <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
             <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
             <CheckBox x:Name="IsCloudLayerTwoVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 2</CheckBox>
+            
+            <CheckBox x:Name="IsStarburstVisibleCheckBox" IsChecked="True">Sterren</CheckBox>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Draaisnelheid sterren" />
+                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600"/>
+                <TextBlock Text="{Binding Value, ElementName=StarburstRotationSpeedSlider}" />
+            </StackPanel>
             
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Handpositie" />
