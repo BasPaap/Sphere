@@ -7,6 +7,15 @@
              x:Name="UserControl"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.OpacityMask>
+            <RadialGradientBrush>
+                <RadialGradientBrush.GradientStops>
+                    <GradientStop Color="Black" Offset="0" />
+                    <GradientStop Color="Black" Offset="{Binding FirstGradientStop, ElementName=UserControl}" />
+                    <GradientStop Color="Transparent" Offset="{Binding SecondGradientStop, ElementName=UserControl}" />
+                </RadialGradientBrush.GradientStops>
+            </RadialGradientBrush>
+        </Grid.OpacityMask>
         <Image Source="Starburst.png" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
@@ -18,5 +27,12 @@
                 <RotateTransform Angle="{Binding RotationAngle2, ElementName=UserControl}" />
             </Image.RenderTransform>
         </Image>
+
+        <Image Source="Starburst3.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <RotateTransform Angle="{Binding RotationAngle3, ElementName=UserControl}" />
+            </Image.RenderTransform>
+        </Image>
     </Grid>
+
 </UserControl>

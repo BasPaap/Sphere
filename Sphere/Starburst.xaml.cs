@@ -43,6 +43,7 @@ namespace Bas.Sphere
             }
 
             RotationAngle2 = rotationAngle * ParallaxDistance;
+            RotationAngle3 = rotationAngle * ParallaxDistance * 2.0;
         }
         
         public double RotationSpeed
@@ -92,6 +93,65 @@ namespace Bas.Sphere
                 NotifyPropertyChanged();
             }
         }
+
+        private double rotationAngle3;
+
+        public double RotationAngle3
+        {
+            get { return rotationAngle3; }
+            set
+            {
+                rotationAngle3 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double firstGradientStop;
+
+        public double FirstGradientStop
+        {
+            get { return firstGradientStop; }
+            set 
+            { 
+                firstGradientStop = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double secondGradientStop;
+
+        public double SecondGradientStop
+        {
+            get { return secondGradientStop; }
+            set
+            {
+                secondGradientStop = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        
+        public double RevealProgress
+        {
+            get { return (double)GetValue(RevealProgressProperty); }
+            set { SetValue(RevealProgressProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RevealProgress.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RevealProgressProperty =
+            DependencyProperty.Register("RevealProgress", typeof(double), typeof(Starburst), new PropertyMetadata(0.0, RevealProgressChanged));
+
+        private static void RevealProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var revealProgress = ((double)e.NewValue).Clamp(0.0, 1.0);
+
+            var starburst = d as Starburst;
+
+            starburst.FirstGradientStop = revealProgress;
+            starburst.SecondGradientStop = (revealProgress * 2.0).Clamp(0.0, 1.0);
+            
+        }
+                
 
         private DispatcherTimer timer;
 

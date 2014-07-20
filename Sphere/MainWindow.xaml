@@ -20,7 +20,8 @@
 
         <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
-                         ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"/>
+                         ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
+                         RevealProgress="{Binding Value, ElementName=HandDistanceSlider}"/>
         
         <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
         
