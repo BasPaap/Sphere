@@ -19,7 +19,8 @@
         </Grid>
 
         <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"/>
+                         RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
+                         ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"/>
         
         <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
         
@@ -31,10 +32,16 @@
             
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Draaisnelheid sterren" />
-                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600"/>
+                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600" Value="2.0"/>
                 <TextBlock Text="{Binding Value, ElementName=StarburstRotationSpeedSlider}" />
             </StackPanel>
-            
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Parallax-afstand sterren" />
+                <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="4.77"/>
+                <TextBlock Text="{Binding Value, ElementName=ParallaxDistanceSlider}" />
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Handpositie" />
                 <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300"/>

@@ -6,9 +6,17 @@
              mc:Ignorable="d" 
              x:Name="UserControl"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Image Source="Starburst.png" RenderTransformOrigin="0.5,0.5">
-        <Image.RenderTransform>
-            <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
-        </Image.RenderTransform>
-    </Image>
+    <Grid>
+        <Image Source="Starburst.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
+            </Image.RenderTransform>
+        </Image>
+
+        <Image Source="Starburst2.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <RotateTransform Angle="{Binding RotationAngle2, ElementName=UserControl}" />
+            </Image.RenderTransform>
+        </Image>
+    </Grid>
 </UserControl>

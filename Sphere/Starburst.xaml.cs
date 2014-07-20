@@ -41,6 +41,8 @@ namespace Bas.Sphere
             {
                 RotationAngle = RotationAngle % 360.0;
             }
+
+            RotationAngle2 = rotationAngle * ParallaxDistance;
         }
         
         public double RotationSpeed
@@ -52,7 +54,21 @@ namespace Bas.Sphere
         // Using a DependencyProperty as the backing store for RotationSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RotationSpeedProperty =
             DependencyProperty.Register("RotationSpeed", typeof(double), typeof(Starburst), new PropertyMetadata(0.0));
-                
+
+
+
+        public double ParallaxDistance
+        {
+            get { return (double)GetValue(ParallaxDistanceProperty); }
+            set { SetValue(ParallaxDistanceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ParallaxDistance.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ParallaxDistanceProperty =
+            DependencyProperty.Register("ParallaxDistance", typeof(double), typeof(Starburst), new PropertyMetadata(0.0));
+
+
+
         private double rotationAngle;
 
         public double RotationAngle
@@ -65,6 +81,17 @@ namespace Bas.Sphere
             }
         }
 
+        private double rotationAngle2;
+
+        public double RotationAngle2
+        {
+            get { return rotationAngle2; }
+            set
+            {
+                rotationAngle2 = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private DispatcherTimer timer;
 
