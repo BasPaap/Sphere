@@ -72,16 +72,16 @@ namespace Bas.Sphere
         private static void IsRevealedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var starburst = d as Starburst;
+            var revealStoryboard = starburst.Resources["RevealStoryboard"] as Storyboard;
+            var dissolveStoryboard = starburst.Resources["DissolveStoryboard"] as Storyboard;
 
             if ((bool)e.NewValue == true)
-            {
-                var storyboard = starburst.Resources["RevealStoryboard"] as Storyboard;
-                storyboard.Begin();
+            {                
+                revealStoryboard.Begin();
             }
             else
             {
-                var storyboard = starburst.Resources["DissolveStoryboard"] as Storyboard;
-                storyboard.Begin();
+                dissolveStoryboard.Begin();
             }
         }
 

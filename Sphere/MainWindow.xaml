@@ -21,7 +21,7 @@
         <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
-                         />
+                         IsRevealed="{Binding IsChecked, ElementName=StarburstIsRevealedCheckBox}" />
         
         <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
         
@@ -43,7 +43,9 @@
                 <TextBlock Text="{Binding Value, ElementName=ParallaxDistanceSlider}" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <CheckBox x:Name="StarburstIsRevealedCheckBox">Sterren onthuld</CheckBox>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />
                 <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300"/>
                 <TextBlock Text="{Binding Value, ElementName=HandDistanceSlider}" />
