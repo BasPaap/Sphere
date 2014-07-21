@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -55,6 +56,34 @@ namespace Bas.Sphere
         // Using a DependencyProperty as the backing store for RotationSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RotationSpeedProperty =
             DependencyProperty.Register("RotationSpeed", typeof(double), typeof(Starburst), new PropertyMetadata(0.0));
+
+
+
+        public Boolean IsRevealed
+        {
+            get { return (Boolean)GetValue(IsRevealedProperty); }
+            set { SetValue(IsRevealedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsRevealed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsRevealedProperty =
+            DependencyProperty.Register("IsRevealed", typeof(Boolean), typeof(Starburst), new PropertyMetadata(false, IsRevealedChanged));
+
+        private static void IsRevealedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var starburst = d as Starburst;
+
+            if ((bool)e.NewValue == true)
+            {
+                var storyboard = starburst.Resources["RevealStoryboard"] as Storyboard;
+                storyboard.Begin();
+            }
+            else
+            {
+                var storyboard = starburst.Resources["DissolveStoryboard"] as Storyboard;
+                storyboard.Begin();
+            }
+        }
 
 
 
@@ -129,30 +158,7 @@ namespace Bas.Sphere
                 NotifyPropertyChanged();
             }
         }
-
         
-        public double RevealProgress
-        {
-            get { return (double)GetValue(RevealProgressProperty); }
-            set { SetValue(RevealProgressProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for RevealProgress.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty RevealProgressProperty =
-            DependencyProperty.Register("RevealProgress", typeof(double), typeof(Starburst), new PropertyMetadata(0.0, RevealProgressChanged));
-
-        private static void RevealProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var revealProgress = ((double)e.NewValue).Clamp(0.0, 1.0);
-
-            var starburst = d as Starburst;
-
-            starburst.FirstGradientStop = revealProgress;
-            starburst.SecondGradientStop = (revealProgress * 2.0).Clamp(0.0, 1.0);
-            
-        }
-                
-
         private DispatcherTimer timer;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
