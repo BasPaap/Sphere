@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HandDistanceToBooleanConverter.cs" />
     <Compile Include="Starburst.xaml.cs">
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>
