@@ -22,6 +22,12 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+
+        <Storyboard x:Key="ToActiveModeStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" >
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>                
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
 
     <Grid Width="854" Height="480">
@@ -68,6 +74,7 @@
                                     </Trigger.EnterActions>
                                     <Trigger.ExitActions>
                                         <StopStoryboard BeginStoryboardName="BeginHeartbeatStoryboard" />
+                                        <BeginStoryboard Name="BeginToActiveModeStoryboard" Storyboard="{StaticResource ToActiveModeStoryboard}" />
                                     </Trigger.ExitActions>
                                 </Trigger>
                             </Style.Triggers>
