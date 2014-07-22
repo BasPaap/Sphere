@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         xmlns:local="clr-namespace:Bas.Sphere"
+        xmlns:localconverters="clr-namespace:Bas.Sphere.Converters"
         SizeToContent="WidthAndHeight"
         Background="Black"
         Title="MainWindow"
@@ -10,7 +11,7 @@
 
     <Window.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <local:HandDistanceToBooleanConverter x:Key="HandDistanceToBooleanConverter" />
+        <localconverters:HandDistanceToBooleanConverter x:Key="HandDistanceToBooleanConverter" />
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" >
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>

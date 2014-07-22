@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Bas.Sphere
+namespace Bas.Sphere.Converters
 {
     class HandDistanceToBooleanConverter : IValueConverter
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bas.Sphere
+namespace Bas.Sphere.Extensions
 {
     public static class MathExtensions
     {
