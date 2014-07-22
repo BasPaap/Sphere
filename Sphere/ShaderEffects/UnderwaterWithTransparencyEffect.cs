@@ -15,7 +15,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 
 
-namespace Bas.Sphere
+namespace Bas.Sphere.ShaderEffects
 {
 
     /// <summary>Applies water defraction effect.</summary>
@@ -29,7 +29,7 @@ namespace Bas.Sphere
         public UnderwaterWithTransparencyEffect()
         {
             PixelShader pixelShader = new PixelShader();
-            pixelShader.UriSource = new Uri("/Bas.Sphere;component/UnderwaterWithTransparencyEffect.ps", UriKind.Relative);
+            pixelShader.UriSource = new Uri("/Bas.Sphere;component/ShaderEffects/UnderwaterWithTransparencyEffect.ps", UriKind.Relative);
             this.PixelShader = pixelShader;
 
             this.UpdateShaderValue(InputProperty);

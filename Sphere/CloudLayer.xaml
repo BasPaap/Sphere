@@ -7,7 +7,7 @@
              x:Name="UserControl"
              d:DesignHeight="480" d:DesignWidth="480">
     <Grid>
-    <Image x:Name="CloudImage" Source="CloudLayer.png" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="CloudImage" Source="Images/CloudLayer.png" RenderTransformOrigin="0.5,0.5">
         <Image.RenderTransform>
             <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
         </Image.RenderTransform>

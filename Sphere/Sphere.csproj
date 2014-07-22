@@ -57,7 +57,7 @@
     <Compile Include="Starburst.xaml.cs">
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UnderwaterWithTransparencyEffect.cs" />
+    <Compile Include="ShaderEffects\UnderwaterWithTransparencyEffect.cs" />
     <Compile Include="Vision.xaml.cs">
       <DependentUpon>Vision.xaml</DependentUpon>
     </Compile>
@@ -113,25 +113,28 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="UnderwaterWithTransparencyEffect.ps" />
+    <Resource Include="ShaderEffects\UnderwaterWithTransparencyEffect.ps" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CloudLayer.png" />
+    <Resource Include="Images\CloudLayer.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Starburst.png" />
+    <Resource Include="Images\Starburst.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Starburst2.png" />
+    <Resource Include="Images\Starburst2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="starburst3.png" />
+    <Resource Include="Images\starburst3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="skull holbein.png" />
+    <Resource Include="Images\skull holbein.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderEffects\UnderwaterWithTransparency.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
