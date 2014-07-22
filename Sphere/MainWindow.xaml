@@ -43,6 +43,8 @@
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
 
+        <local:Vision x:Name="Vision" />
+        
         <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
 
             <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
@@ -62,6 +64,8 @@
                 <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="4.77"/>
                 <TextBlock Text="{Binding Value, ElementName=ParallaxDistanceSlider}" />
             </StackPanel>
+            
+            <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />

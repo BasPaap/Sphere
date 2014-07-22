@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Bas.Sphere.Vision"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bas.Sphere"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="LayoutRoot"
+             Visibility="Hidden">
+	<UserControl.Resources>
+		<Storyboard x:Key="RevealStoryboard" Completed="RevealStoryboard_Completed" >
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:8.5" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:9.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:3.5" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:8.5" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:9.5" Value="{x:Static Visibility.Hidden}"/>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+        
+        <local:UnderwaterEffect x:Key="UnderwaterEffect" Timer="20" VerticalTroughWidth="0" Wobble2="0" Refracton="200" />
+        
+	</UserControl.Resources>
+	<Grid>
+        <Image Source="skull holbein.png" Effect="{StaticResource UnderwaterEffect}" />
+    </Grid>
+</UserControl>

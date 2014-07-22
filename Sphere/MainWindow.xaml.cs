@@ -49,6 +49,11 @@ namespace Bas.Sphere
             }
         }
 
+        private void RevealVisionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Vision.Reveal();
+        }
+
 
     }
 }
