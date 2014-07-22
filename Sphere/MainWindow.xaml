@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         xmlns:local="clr-namespace:Bas.Sphere"
+        
         xmlns:localconverters="clr-namespace:Bas.Sphere.Converters"
-        SizeToContent="WidthAndHeight"
         Background="Black"
         Title="MainWindow"
         KeyUp="Window_KeyUp">
@@ -32,19 +32,18 @@
         </Storyboard>
     </Window.Resources>
 
-    <Grid Width="854" Height="480">
-
+    <Grid>
         <Grid x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
+            <local:CloudLayer Margin="10" MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <local:CloudLayer Margin="10"  MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
         </Grid>
 
-        <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+        <local:Starburst Margin="10" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
 
-        <local:Vision x:Name="Vision" />
+        <local:Vision x:Name="Vision" Margin="10" />
         
         <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
 

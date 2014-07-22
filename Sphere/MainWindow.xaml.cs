@@ -44,6 +44,21 @@ namespace Bas.Sphere
                 case Key.Escape:
                     DebugControlsStackPanel.Visibility = (DebugControlsStackPanel.Visibility == System.Windows.Visibility.Visible) ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
                     break;
+                case Key.F:
+                    if (this.WindowStyle == System.Windows.WindowStyle.None)
+                    {
+                        this.ResizeMode = System.Windows.ResizeMode.CanResize;
+                        this.WindowState = System.Windows.WindowState.Normal;
+                        this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
+                    }
+                    else
+                    {
+                        this.ResizeMode = System.Windows.ResizeMode.NoResize;
+
+                        this.WindowState = System.Windows.WindowState.Maximized;
+                        this.WindowStyle = System.Windows.WindowStyle.None;
+                    }
+                    break;
                 default:
                     break;
             }
