@@ -26,18 +26,18 @@ namespace Bas.Sphere
         {
             InitializeComponent();
 
-            underwaterEffect = Resources["UnderwaterEffect"] as UnderwaterEffect;
+            underwaterWithTransparencyEffect = Resources["UnderwaterWithTransparencyEffect"] as UnderwaterWithTransparencyEffect;
 
             this.shaderTimer = new DispatcherTimer();
             this.shaderTimer.Interval = TimeSpan.FromSeconds(1.0 / 3.0);
             this.shaderTimer.Tick += shaderTimer_Tick;            
         }
 
-        private UnderwaterEffect underwaterEffect;
+        private UnderwaterWithTransparencyEffect underwaterWithTransparencyEffect;
 
         void shaderTimer_Tick(object sender, EventArgs e)
         {
-            this.underwaterEffect.Timer += this.shaderTimer.Interval.TotalSeconds;
+            this.underwaterWithTransparencyEffect.Timer += this.shaderTimer.Interval.TotalSeconds;
         }
 
         private DispatcherTimer shaderTimer;

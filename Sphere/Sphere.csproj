@@ -57,7 +57,7 @@
     <Compile Include="Starburst.xaml.cs">
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UnderwaterEffect.cs" />
+    <Compile Include="UnderwaterWithTransparencyEffect.cs" />
     <Compile Include="Vision.xaml.cs">
       <DependentUpon>Vision.xaml</DependentUpon>
     </Compile>
@@ -113,7 +113,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="UnderwaterEffect.ps" />
+    <Resource Include="UnderwaterWithTransparencyEffect.ps" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

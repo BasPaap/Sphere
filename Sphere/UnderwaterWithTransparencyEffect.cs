@@ -19,17 +19,17 @@ namespace Bas.Sphere
 {
 
     /// <summary>Applies water defraction effect.</summary>
-    public class UnderwaterEffect : ShaderEffect
+    public class UnderwaterWithTransparencyEffect : ShaderEffect
     {
-        public static readonly DependencyProperty InputProperty = ShaderEffect.RegisterPixelShaderSamplerProperty("Input", typeof(UnderwaterEffect), 0);
-        public static readonly DependencyProperty TimerProperty = DependencyProperty.Register("Timer", typeof(double), typeof(UnderwaterEffect), new UIPropertyMetadata(((double)(0D)), PixelShaderConstantCallback(0)));
-        public static readonly DependencyProperty RefractonProperty = DependencyProperty.Register("Refracton", typeof(double), typeof(UnderwaterEffect), new UIPropertyMetadata(((double)(50D)), PixelShaderConstantCallback(1)));
-        public static readonly DependencyProperty VerticalTroughWidthProperty = DependencyProperty.Register("VerticalTroughWidth", typeof(double), typeof(UnderwaterEffect), new UIPropertyMetadata(((double)(23D)), PixelShaderConstantCallback(2)));
-        public static readonly DependencyProperty Wobble2Property = DependencyProperty.Register("Wobble2", typeof(double), typeof(UnderwaterEffect), new UIPropertyMetadata(((double)(23D)), PixelShaderConstantCallback(3)));
-        public UnderwaterEffect()
+        public static readonly DependencyProperty InputProperty = ShaderEffect.RegisterPixelShaderSamplerProperty("Input", typeof(UnderwaterWithTransparencyEffect), 0);
+        public static readonly DependencyProperty TimerProperty = DependencyProperty.Register("Timer", typeof(double), typeof(UnderwaterWithTransparencyEffect), new UIPropertyMetadata(((double)(0D)), PixelShaderConstantCallback(0)));
+        public static readonly DependencyProperty RefractonProperty = DependencyProperty.Register("Refracton", typeof(double), typeof(UnderwaterWithTransparencyEffect), new UIPropertyMetadata(((double)(50D)), PixelShaderConstantCallback(1)));
+        public static readonly DependencyProperty VerticalTroughWidthProperty = DependencyProperty.Register("VerticalTroughWidth", typeof(double), typeof(UnderwaterWithTransparencyEffect), new UIPropertyMetadata(((double)(23D)), PixelShaderConstantCallback(2)));
+        public static readonly DependencyProperty Wobble2Property = DependencyProperty.Register("Wobble2", typeof(double), typeof(UnderwaterWithTransparencyEffect), new UIPropertyMetadata(((double)(23D)), PixelShaderConstantCallback(3)));
+        public UnderwaterWithTransparencyEffect()
         {
             PixelShader pixelShader = new PixelShader();
-            pixelShader.UriSource = new Uri("/Bas.Sphere;component/UnderwaterEffect.ps", UriKind.Relative);
+            pixelShader.UriSource = new Uri("/Bas.Sphere;component/UnderwaterWithTransparencyEffect.ps", UriKind.Relative);
             this.PixelShader = pixelShader;
 
             this.UpdateShaderValue(InputProperty);
