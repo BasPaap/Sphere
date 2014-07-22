@@ -29,7 +29,7 @@ namespace Bas.Sphere
             underwaterWithTransparencyEffect = Resources["UnderwaterWithTransparencyEffect"] as UnderwaterWithTransparencyEffect;
 
             this.shaderTimer = new DispatcherTimer();
-            this.shaderTimer.Interval = TimeSpan.FromSeconds(1.0 / 3.0);
+            this.shaderTimer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
             this.shaderTimer.Tick += shaderTimer_Tick;            
         }
 

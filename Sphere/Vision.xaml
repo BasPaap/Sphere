@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="LayoutRoot"
-             >
+             Visibility="Hidden">
 	<UserControl.Resources>
 		<Storyboard x:Key="RevealStoryboard" Completed="RevealStoryboard_Completed" >
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:8.5" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="0.8"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:8.5" Value="0.81"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:9.5" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
@@ -24,10 +24,10 @@
 			</ObjectAnimationUsingKeyFrames>
 		</Storyboard>
         
-        <local:UnderwaterWithTransparencyEffect x:Key="UnderwaterWithTransparencyEffect" Timer="20" VerticalTroughWidth="0" Wobble2="0" Refracton="200" />
+        <local:UnderwaterWithTransparencyEffect x:Key="UnderwaterWithTransparencyEffect" Timer="0" VerticalTroughWidth="0" Wobble2="0" Refracton="200" />
         
 	</UserControl.Resources>
     <Grid>
-        <Image Source="skull holbein.png" Effect="{StaticResource UnderwaterWithTransparencyEffect}" />
+        <Image Source="skull holbein.png" Effect="{StaticResource UnderwaterWithTransparencyEffect}" />        
     </Grid>
 </UserControl>
