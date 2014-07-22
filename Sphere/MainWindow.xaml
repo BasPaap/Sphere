@@ -5,7 +5,8 @@
         xmlns:local="clr-namespace:Bas.Sphere"
         SizeToContent="WidthAndHeight"
         Background="Black"
-        Title="MainWindow">
+        Title="MainWindow"
+        KeyUp="Window_KeyUp">
 
     <Window.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -42,7 +43,7 @@
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
 
-        <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
+        <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
 
             <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
             <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>

@@ -37,6 +37,18 @@ namespace Bas.Sphere
         public static readonly DependencyProperty HandDistanceProperty =
             DependencyProperty.Register("HandDistance", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
 
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    DebugControlsStackPanel.Visibility = (DebugControlsStackPanel.Visibility == System.Windows.Visibility.Visible) ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
     }
 }
