@@ -11,10 +11,11 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:HandDistanceToBooleanConverter x:Key="HandDistanceToBooleanConverter" />
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=grid}" >
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" >
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.75"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.7501"/> <!-- Weird: it stutters if you keep it at the same opacity. To work around that we increase the opacity marginally. -->
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <QuinticEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -25,7 +26,7 @@
 
     <Grid Width="854" Height="480">
 
-        <Grid x:Name="grid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="1.0" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="1.5" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
         </Grid>
