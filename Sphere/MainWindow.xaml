@@ -33,8 +33,8 @@
     <Grid Width="854" Height="480">
 
         <Grid x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="1.0" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="1.5" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
+            <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
         </Grid>
 
         <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"

@@ -38,7 +38,7 @@ namespace Bas.Sphere
             var clampedAcceleration = Acceleration.Clamp(0.0, 1.0);
 
             CurrentSpeed = (CurrentSpeed + (this.timer.Interval.TotalSeconds * AccelerationRate * clampedAcceleration)).Clamp(MinimumSpeed, AccelerationRate * clampedAcceleration);
-
+                        
             RotationAngle -= currentSpeed;
             
             if (RotationAngle < 0.0)
