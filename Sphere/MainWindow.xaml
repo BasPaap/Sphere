@@ -33,14 +33,14 @@
     <Grid Width="854" Height="480">
 
         <Grid x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding Value, ElementName=HandDistanceSlider}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
+            <local:CloudLayer MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <local:CloudLayer MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
         </Grid>
 
         <local:Starburst Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
-                         IsRevealed="{Binding Value, ElementName=HandDistanceSlider, Converter={StaticResource HandDistanceToBooleanConverter}}" />
+                         IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
 
         <StackPanel Background="#AAFFFFFF" VerticalAlignment="Bottom">
 
@@ -64,7 +64,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />
-                <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300">
+                <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandDistance, Mode=TwoWay}">
                     <Slider.Style>
                         <Style TargetType="Slider">
                             <Style.Triggers>
@@ -81,7 +81,7 @@
                         </Style>
                     </Slider.Style>
                 </Slider>
-                <TextBlock Text="{Binding Value, ElementName=HandDistanceSlider}" />
+                <TextBlock Text="{Binding HandDistance}" />
             </StackPanel>
         </StackPanel>
     </Grid>

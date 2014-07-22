@@ -23,6 +23,20 @@ namespace Bas.Sphere
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = this;
         }
+        
+        public double HandDistance
+        {
+            get { return (double)GetValue(HandDistanceProperty); }
+            set { SetValue(HandDistanceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HandDistance.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HandDistanceProperty =
+            DependencyProperty.Register("HandDistance", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
+
+
     }
 }
