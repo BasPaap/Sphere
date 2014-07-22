@@ -1,7 +1,9 @@
 ﻿using Bas.Sphere.ShaderEffects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +23,7 @@ namespace Bas.Sphere
     /// <summary>
     /// Interaction logic for Vision.xaml
     /// </summary>
-    public partial class Vision : UserControl
+    public partial class Vision : UserControl, INotifyPropertyChanged
     {
         public Vision()
         {
@@ -57,5 +59,25 @@ namespace Bas.Sphere
             // Disable the shader effect to preserve resources
             this.shaderTimer.Stop();
         }
+                        
+        public VisionType Type
+        {
+            get { return (VisionType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.Register("Type", typeof(VisionType), typeof(Vision), new PropertyMetadata(VisionType.None));
+
+        private void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

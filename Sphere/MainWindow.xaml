@@ -3,13 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         xmlns:local="clr-namespace:Bas.Sphere"
-        
+        xmlns:system="clr-namespace:System;assembly=mscorlib"        
         xmlns:localconverters="clr-namespace:Bas.Sphere.Converters"
         Background="Black"
         Title="MainWindow"
         KeyUp="Window_KeyUp">
 
     <Window.Resources>
+
+        <ObjectDataProvider x:Key="VisionTypes" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:VisionType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <localconverters:HandDistanceToBooleanConverter x:Key="HandDistanceToBooleanConverter" />
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
@@ -43,7 +51,7 @@
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
 
-        <local:Vision x:Name="Vision" Margin="10" />
+        <local:Vision x:Name="Vision" Margin="10" Type="Love" />
         
         <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
 
@@ -64,9 +72,12 @@
                 <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="4.77"/>
                 <TextBlock Text="{Binding Value, ElementName=ParallaxDistanceSlider}" />
             </StackPanel>
-            
-            <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
 
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VisionTypes}}" SelectedItem="{Binding Type, ElementName=Vision}" />
+                <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />
                 <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandDistance, Mode=TwoWay}">
