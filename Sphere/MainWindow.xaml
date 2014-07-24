@@ -4,6 +4,7 @@
         xmlns:converters="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         xmlns:local="clr-namespace:Bas.Sphere"
         xmlns:system="clr-namespace:System;assembly=mscorlib"        
+        xmlns:shaders="clr-namespace:Bas.Sphere.ShaderEffects"
         xmlns:localconverters="clr-namespace:Bas.Sphere.Converters"
         Background="Black"
         Title="MainWindow"
@@ -43,6 +44,10 @@
 
     <Grid>
         <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5">
+            <Grid.Effect>
+                <shaders:BarrelDistortionEffect BarrelAmountX="{Binding Value, ElementName=BarrelDistortionSlider}" />    
+            </Grid.Effect>
+            
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -97,6 +102,12 @@
                 <TextBlock Text="{Binding Value, ElementName=SphereFrontSlider}" />
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <TextBlock Text="Distortion" />
+                <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" />
+                <TextBlock Text="{Binding Value, ElementName=BarrelDistortionSlider}" />
+            </StackPanel>
+        
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />
                 <Slider x:Name="HandDistanceSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandDistance, Mode=TwoWay}">

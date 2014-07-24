@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\HandDistanceToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
+    <Compile Include="ShaderEffects\BarreldistortionEffect.cs" />
     <Compile Include="Starburst.xaml.cs">
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>
@@ -136,6 +137,7 @@
     <Resource Include="Images\skull holbein.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ShaderEffects\BarrelDistortionEffect.ps" />
     <None Include="ShaderEffects\UnderwaterWithTransparency.fx" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\still life of coins francken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ShaderEffects\barreldistortion.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
