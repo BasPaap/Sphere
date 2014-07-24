@@ -42,11 +42,15 @@
     </Window.Resources>
 
     <Grid>
-        <Grid x:Name="VisualsGrid">
+        <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
+            
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Value, ElementName=SphereFrontSlider}" />
+            </Grid.RenderTransform>
 
             <Grid Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:CloudLayer Margin="10" MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -85,6 +89,12 @@
             <StackPanel Orientation="Horizontal">
                 <ComboBox Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VisionTypes}}" SelectedItem="{Binding Type, ElementName=Vision}" />
                 <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Voorkant bol</TextBlock>
+                <Slider x:Name="SphereFrontSlider" Minimum="0" Maximum="360" Width="500"/>
+                <TextBlock Text="{Binding Value, ElementName=SphereFrontSlider}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
