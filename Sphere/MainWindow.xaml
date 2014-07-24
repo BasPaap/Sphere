@@ -62,7 +62,7 @@
                 <local:CloudLayer  MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
             </Grid>
 
-            <local:Starburst Grid.RowSpan="2" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            <local:Starburst ClipToBounds="True" Grid.RowSpan="2" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
