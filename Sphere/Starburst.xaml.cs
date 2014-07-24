@@ -30,8 +30,7 @@ namespace Bas.Sphere
 
             this.timer = new DispatcherTimer();
             this.timer.Tick += timer_Tick;
-            this.timer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
-            this.timer.Start();
+            this.timer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);            
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -76,7 +75,8 @@ namespace Bas.Sphere
             var dissolveStoryboard = starburst.Resources["DissolveStoryboard"] as Storyboard;
 
             if ((bool)e.NewValue == true)
-            {                
+            {
+                starburst.timer.Start();
                 revealStoryboard.Begin();
             }
             else
@@ -170,5 +170,10 @@ namespace Bas.Sphere
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void DissolveStoryboard_Completed(object sender, EventArgs e)
+        {
+            this.timer.Stop();
+        }
     }
 }
