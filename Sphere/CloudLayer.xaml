@@ -6,17 +6,12 @@
              mc:Ignorable="d" 
              x:Name="UserControl"
              d:DesignHeight="480" d:DesignWidth="480">
-    <Grid>
-        <Image x:Name="CloudImage" Source="Images/CloudLayer.png" RenderTransformOrigin="0.5,0.5">
-        <Image.RenderTransform>
-            <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
-        </Image.RenderTransform>
-    </Image>
-    <StackPanel Background="#AAFFFFFF" Height="100" Visibility="Collapsed">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="CurrentSpeed:" />
-                <TextBlock Text="{Binding CurrentSpeed, ElementName=UserControl}" />
-            </StackPanel>
-        </StackPanel>
-    </Grid>
+    
+    <Border BorderThickness="1" BorderBrush="Transparent">
+            <Image x:Name="CloudImage" Source="Images/CloudLayer.png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
+                </Image.RenderTransform>
+            </Image>
+    </Border>
 </UserControl>

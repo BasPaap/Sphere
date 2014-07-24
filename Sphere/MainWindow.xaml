@@ -57,12 +57,12 @@
                 <RotateTransform Angle="{Binding Value, ElementName=SphereFrontSlider}" />
             </Grid.RenderTransform>
 
-            <Grid Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:CloudLayer Margin="10" MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <local:CloudLayer Margin="10"  MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
+            <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:CloudLayer  MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <local:CloudLayer  MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
             </Grid>
 
-            <local:Starburst Grid.RowSpan="2" Margin="10" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            <local:Starburst Grid.RowSpan="2" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />
