@@ -16,29 +16,11 @@ uniform float PI = 3.14159265f;
 /// <defaultValue>0.1</defaultValue>
 float BarrelAmountX : register(C0);
 
-/// <summary>Appears to do nothing but is still required for the shader to work, for some reason.</summary>
-/// <minValue>0/minValue>
-/// <maxValue>1.0</maxValue>
-/// <defaultValue>0.1</defaultValue>
-float BarrelAmountY : register(C1);
-
-uniform float WidthRatio;
-uniform float HeightRatio;
-
-sampler DiffuseSampler = sampler_state
-{
-	Texture   = <Diffuse>;
-	MipFilter = LINEAR;
-	MinFilter = LINEAR;
-	MagFilter = LINEAR;
-	AddressU = CLAMP;
-	AddressV = CLAMP;
-	AddressW = CLAMP;
-};
+sampler2D inputSampler : register(s0); 
 
 float4 main(float2 Input : TEXCOORD) : COLOR 
 {
-	float2 Ratios = float2(WidthRatio, HeightRatio);
+	float2 Ratios = float2(1.0f, 1.0f);
 
 	// -- Screen Barrel Calculation --
 	float2 UnitCoord = Input * Ratios * 2.0f - 1.0f;
@@ -57,6 +39,6 @@ float4 main(float2 Input : TEXCOORD) : COLOR
   } 
 	else
  	{
- 		return tex2D(DiffuseSampler, BaseCoord);
+ 		return tex2D(inputSampler, BaseCoord);
   }	
 }

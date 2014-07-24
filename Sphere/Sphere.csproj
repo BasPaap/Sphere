@@ -55,7 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\HandDistanceToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
-    <Compile Include="ShaderEffects\BarreldistortionEffect.cs" />
+    <Compile Include="ShaderEffects\BarrelDistortionEffect.cs" />
     <Compile Include="Starburst.xaml.cs">
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>

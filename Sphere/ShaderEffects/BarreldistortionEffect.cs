@@ -15,44 +15,47 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 
 
-namespace Bas.Sphere.ShaderEffects {
-	
-	public class BarrelDistortionEffect : ShaderEffect {
-		public static readonly DependencyProperty InputProperty = ShaderEffect.RegisterPixelShaderSamplerProperty("Input", typeof(BarrelDistortionEffect), 0);
-		public static readonly DependencyProperty BarrelAmountXProperty = DependencyProperty.Register("BarrelAmountX", typeof(double), typeof(BarrelDistortionEffect), new UIPropertyMetadata(((double)(0.1D)), PixelShaderConstantCallback(0)));
-		public static readonly DependencyProperty BarrelAmountYProperty = DependencyProperty.Register("BarrelAmountY", typeof(double), typeof(BarrelDistortionEffect), new UIPropertyMetadata(((double)(0.1D)), PixelShaderConstantCallback(1)));
-		public BarrelDistortionEffect() {
-			PixelShader pixelShader = new PixelShader();
-            pixelShader.UriSource = new Uri("/Bas.Sphere;component/ShaderEffects/BarrelDistortionEffect.ps", UriKind.Relative);
-			this.PixelShader = pixelShader;
+namespace Bas.Sphere.ShaderEffects
+{
 
-			this.UpdateShaderValue(InputProperty);
-			this.UpdateShaderValue(BarrelAmountXProperty);
-			this.UpdateShaderValue(BarrelAmountYProperty);
-		}
-		public Brush Input {
-			get {
-				return ((Brush)(this.GetValue(InputProperty)));
-			}
-			set {
-				this.SetValue(InputProperty, value);
-			}
-		}
-		public double BarrelAmountX {
-			get {
-				return ((double)(this.GetValue(BarrelAmountXProperty)));
-			}
-			set {
-				this.SetValue(BarrelAmountXProperty, value);
-			}
-		}
-		public double BarrelAmountY {
-			get {
-				return ((double)(this.GetValue(BarrelAmountYProperty)));
-			}
-			set {
-				this.SetValue(BarrelAmountYProperty, value);
-			}
-		}
-	}
+    public class BarrelDistortionEffect : ShaderEffect
+    {
+
+        public static readonly DependencyProperty InputProperty = ShaderEffect.RegisterPixelShaderSamplerProperty("Input", typeof(BarrelDistortionEffect), 0);
+        public static readonly DependencyProperty BarrelAmountXProperty = DependencyProperty.Register("BarrelAmountX", typeof(double), typeof(BarrelDistortionEffect), new UIPropertyMetadata(((double)(0.1D)), PixelShaderConstantCallback(0)));
+
+        public BarrelDistortionEffect()
+        {
+            PixelShader pixelShader = new PixelShader();
+            pixelShader.UriSource = new Uri("/Bas.Sphere;component/ShaderEffects/BarrelDistortionEffect.ps", UriKind.Relative);
+            this.PixelShader = pixelShader;
+
+            this.UpdateShaderValue(InputProperty);
+            this.UpdateShaderValue(BarrelAmountXProperty);        
+        }
+
+        public Brush Input
+        {
+            get
+            {
+                return ((Brush)(this.GetValue(InputProperty)));
+            }
+            set
+            {
+                this.SetValue(InputProperty, value);
+            }
+        }
+
+        public double BarrelAmountX
+        {
+            get
+            {
+                return ((double)(this.GetValue(BarrelAmountXProperty)));
+            }
+            set
+            {
+                this.SetValue(BarrelAmountXProperty, value);
+            }
+        }
+    }
 }
