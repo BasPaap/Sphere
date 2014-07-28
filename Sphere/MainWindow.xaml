@@ -54,7 +54,7 @@
             </Grid.RowDefinitions>
             
             <Grid.RenderTransform>
-                <RotateTransform Angle="{Binding Value, ElementName=SphereFrontSlider}" />
+                <RotateTransform Angle="{Binding Value, ElementName=SphereFrontAngleSlider}" />
             </Grid.RenderTransform>
 
             <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -99,8 +99,8 @@
             
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Voorkant bol</TextBlock>
-                <Slider x:Name="SphereFrontSlider" Minimum="0" Maximum="360" Width="500"/>
-                <TextBlock Text="{Binding Value, ElementName=SphereFrontSlider}" />
+                <Slider x:Name="SphereFrontAngleSlider" Minimum="0" Maximum="360" Width="500"/>
+                <TextBlock Text="{Binding Value, ElementName=SphereFrontAngleSlider}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
