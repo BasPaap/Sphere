@@ -6,6 +6,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"        
         xmlns:shaders="clr-namespace:Bas.Sphere.ShaderEffects"
         xmlns:localconverters="clr-namespace:Bas.Sphere.Converters"
+        xmlns:properties="clr-namespace:Bas.Sphere.Properties"
         Background="Black"
         Title="MainWindow"
         KeyUp="Window_KeyUp">
@@ -45,7 +46,7 @@
     <Grid>
         <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
             <Grid.Effect>
-                <shaders:BarrelDistortionEffect BarrelAmountX="{Binding Value, ElementName=BarrelDistortionSlider}" />    
+                <shaders:BarrelDistortionEffect BarrelAmountX="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />    
             </Grid.Effect>
             
             <Grid.RowDefinitions>
@@ -54,7 +55,7 @@
             </Grid.RowDefinitions>
             
             <Grid.RenderTransform>
-                <RotateTransform Angle="{Binding Value, ElementName=SphereFrontAngleSlider}" />
+                <RotateTransform Angle="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
             </Grid.RenderTransform>
 
             <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -64,8 +65,8 @@
 
             <local:Starburst ClipToBounds="True" Grid.RowSpan="2" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-                         RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
-                         ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
+                         RotationSpeed="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}"
+                         ParallaxDistance="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}"
                          IsRevealed="{Binding HandProximity, Converter={StaticResource HandProximityToBooleanConverter}}" />
 
             <local:Vision Grid.Row="1" x:Name="Vision" Margin="10" Type="Love" RenderTransformOrigin="0.5,0.5" />
@@ -82,14 +83,14 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Draaisnelheid sterren" />
-                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600" Value="2.0"/>
-                <TextBlock Text="{Binding Value, ElementName=StarburstRotationSpeedSlider}" />
+                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600" Value="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}"/>
+                <TextBlock Text="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Parallax-afstand sterren" />
-                <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="4.77"/>
-                <TextBlock Text="{Binding Value, ElementName=ParallaxDistanceSlider}" />
+                <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}"/>
+                <TextBlock Text="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
@@ -99,14 +100,14 @@
             
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Voorkant bol</TextBlock>
-                <Slider x:Name="SphereFrontAngleSlider" Minimum="0" Maximum="360" Width="500"/>
-                <TextBlock Text="{Binding Value, ElementName=SphereFrontAngleSlider}" />
+                <Slider x:Name="SphereFrontAngleSlider" Minimum="0" Maximum="360" Width="500" Value="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}"/>
+                <TextBlock Text="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Distortion" />
-                <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" />
-                <TextBlock Text="{Binding Value, ElementName=BarrelDistortionSlider}" />
+                <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
+                <TextBlock Text="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
         
             <StackPanel Orientation="Horizontal" Margin="0,10">

@@ -22,5 +22,53 @@ namespace Bas.Sphere.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public double StarburstRotationSpeed {
+            get {
+                return ((double)(this["StarburstRotationSpeed"]));
+            }
+            set {
+                this["StarburstRotationSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4.77")]
+        public double StarburstParallaxDistance {
+            get {
+                return ((double)(this["StarburstParallaxDistance"]));
+            }
+            set {
+                this["StarburstParallaxDistance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double SphereFrontAngle {
+            get {
+                return ((double)(this["SphereFrontAngle"]));
+            }
+            set {
+                this["SphereFrontAngle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double BarrelDistortionAmount {
+            get {
+                return ((double)(this["BarrelDistortionAmount"]));
+            }
+            set {
+                this["BarrelDistortionAmount"] = value;
+            }
+        }
     }
 }
