@@ -77,10 +77,13 @@
 
             <local:Vision Grid.Row="1" x:Name="Vision" Margin="10" Type="Love" RenderTransformOrigin="0.5,0.5" />
 
+            <local:TestImage Grid.RowSpan="2" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                             Visibility="{Binding IsChecked, ElementName=IsTestImageVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
 
         <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
 
+            <CheckBox x:Name="IsTestImageVisibleCheckBox" IsChecked="False">Testbeeld</CheckBox>
             <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
             <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
             <CheckBox x:Name="IsCloudLayerTwoVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 2</CheckBox>

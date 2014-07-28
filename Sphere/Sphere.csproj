@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DivisionConverter.cs" />
     <Compile Include="Converters\HandProximityToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
     <Compile Include="ShaderEffects\BarrelDistortionEffect.cs" />
@@ -60,6 +61,9 @@
       <DependentUpon>Starburst.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShaderEffects\UnderwaterWithTransparencyEffect.cs" />
+    <Compile Include="TestImage.xaml.cs">
+      <DependentUpon>TestImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vision.xaml.cs">
       <DependentUpon>Vision.xaml</DependentUpon>
     </Compile>
@@ -84,6 +88,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Starburst.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
