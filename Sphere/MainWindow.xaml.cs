@@ -27,15 +27,15 @@ namespace Bas.Sphere
             this.DataContext = this;
         }
         
-        public double HandDistance
+        public double HandProximity
         {
-            get { return (double)GetValue(HandDistanceProperty); }
-            set { SetValue(HandDistanceProperty, value); }
+            get { return (double)GetValue(HandProximityProperty); }
+            set { SetValue(HandProximityProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for HandDistance.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HandDistanceProperty =
-            DependencyProperty.Register("HandDistance", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
+        // Using a DependencyProperty as the backing store for HandProximity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HandProximityProperty =
+            DependencyProperty.Register("HandProximity", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {

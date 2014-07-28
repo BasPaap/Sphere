@@ -53,7 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\HandDistanceToBooleanConverter.cs" />
+    <Compile Include="Converters\HandProximityToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
     <Compile Include="ShaderEffects\BarrelDistortionEffect.cs" />
     <Compile Include="Starburst.xaml.cs">
