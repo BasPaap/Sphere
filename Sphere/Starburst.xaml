@@ -50,23 +50,32 @@
                 </RadialGradientBrush.GradientStops>
             </RadialGradientBrush>
         </Grid.OpacityMask>
-        <Image Source="Images/Starburst.png" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
+        <Ellipse RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
                 <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
-            </Image.RenderTransform>
-        </Image>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="Images/Starburst.png" />
+            </Ellipse.Fill>
+        </Ellipse>
 
-        <Image Source="Images/Starburst2.png" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
+        <Ellipse RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
                 <RotateTransform Angle="{Binding RotationAngle2, ElementName=UserControl}" />
-            </Image.RenderTransform>
-        </Image>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="Images/Starburst2.png" />
+            </Ellipse.Fill>
+        </Ellipse>
 
-        <Image Source="Images/Starburst3.png" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
+        <Ellipse RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
                 <RotateTransform Angle="{Binding RotationAngle3, ElementName=UserControl}" />
-            </Image.RenderTransform>
-        </Image>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="Images/Starburst3.png" />
+            </Ellipse.Fill>
+        </Ellipse>
     </Grid>
 
 </UserControl>

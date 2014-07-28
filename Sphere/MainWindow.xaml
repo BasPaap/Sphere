@@ -43,7 +43,7 @@
     </Window.Resources>
 
     <Grid>
-        <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
             <Grid.Effect>
                 <shaders:BarrelDistortionEffect BarrelAmountX="{Binding Value, ElementName=BarrelDistortionSlider}" />    
             </Grid.Effect>
@@ -58,11 +58,12 @@
             </Grid.RenderTransform>
 
             <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:CloudLayer  MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <local:CloudLayer  MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
+                <local:CloudLayer Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" MinimumSpeed="0.2" AccelerationRate="3.5" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerOneVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <local:CloudLayer Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" MinimumSpeed="0.3" AccelerationRate="8.0" Acceleration="{Binding HandDistance}" Visibility="{Binding IsChecked, ElementName=IsCloudLayerTwoVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5" />
             </Grid>
 
             <local:Starburst ClipToBounds="True" Grid.RowSpan="2" Visibility="{Binding IsChecked, ElementName=IsStarburstVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
                          RotationSpeed="{Binding Value, ElementName=StarburstRotationSpeedSlider}"
                          ParallaxDistance="{Binding Value, ElementName=ParallaxDistanceSlider}"
                          IsRevealed="{Binding HandDistance, Converter={StaticResource HandDistanceToBooleanConverter}}" />

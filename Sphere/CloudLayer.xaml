@@ -7,11 +7,13 @@
              x:Name="UserControl"
              d:DesignHeight="480" d:DesignWidth="480">
     
-    <Border BorderThickness="1" BorderBrush="Transparent">
-            <Image x:Name="CloudImage" Source="Images/CloudLayer.png" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
-                </Image.RenderTransform>
-            </Image>
-    </Border>
+        <Ellipse RenderTransformOrigin="0.5,0.5">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="Images/CloudLayer.png" />
+            </Ellipse.Fill>
+            <Ellipse.RenderTransform>
+                <RotateTransform Angle="{Binding RotationAngle, ElementName=UserControl}" />
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    
 </UserControl>
