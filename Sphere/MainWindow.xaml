@@ -34,17 +34,12 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <localconverters:HandProximityToBooleanConverter x:Key="HandProximityToBooleanConverter" />
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.75"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.7501"/>
-                <!-- Weird: it stutters if you keep it at the same opacity. To work around that we increase the opacity marginally. -->
-                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuinticEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0.75" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" BeginTime="0:0:2" Duration="0:0:1" From="0.75" To="1">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>                
+            </DoubleAnimation>                        
         </Storyboard>
 
         <Storyboard x:Key="ToActiveModeStoryboard">

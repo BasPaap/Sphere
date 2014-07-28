@@ -31,7 +31,7 @@ namespace Bas.Sphere
 
             underwaterWithTransparencyEffect = Resources["UnderwaterWithTransparencyEffect"] as UnderwaterWithTransparencyEffect;
 
-            this.shaderTimer = new DispatcherTimer();
+            this.shaderTimer = new DispatcherTimer(DispatcherPriority.Normal); // To stop the animation from jittering when it's not animating.
             this.shaderTimer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
             this.shaderTimer.Tick += shaderTimer_Tick;            
         }
