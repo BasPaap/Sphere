@@ -26,7 +26,13 @@ namespace Bas.Sphere
 
             this.DataContext = this;
         }
-        
+
+        private void ExecuteSaveCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Opgeslagen!", "Sphere", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         public double HandProximity
         {
             get { return (double)GetValue(HandProximityProperty); }

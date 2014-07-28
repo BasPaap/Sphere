@@ -11,6 +11,17 @@
         Title="MainWindow"
         KeyUp="Window_KeyUp">
 
+    <Window.InputBindings>
+        <KeyBinding Key="S"
+                    Modifiers="Control"
+                    Command="Save" />
+    </Window.InputBindings>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="Save"
+                        Executed="ExecuteSaveCommand" />
+    </Window.CommandBindings>
+    
     <Window.Resources>
 
         <ObjectDataProvider x:Key="VisionTypes" MethodName="GetValues"
