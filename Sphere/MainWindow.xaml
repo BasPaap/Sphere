@@ -61,7 +61,10 @@
             </Grid.RowDefinitions>
             
             <Grid.RenderTransform>
-                <RotateTransform Angle="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
+                <TransformGroup>
+                    <RotateTransform Angle="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
+                    <ScaleTransform ScaleX="{Binding Scale, Source={x:Static properties:Settings.Default}}" ScaleY="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
+                </TransformGroup>                
             </Grid.RenderTransform>
 
             <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -113,12 +116,16 @@
                 <TextBlock Text="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,10">
+            <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Distortion" />
                 <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
                 <TextBlock Text="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
             </StackPanel>
-        
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="Schaal" />
+                <Slider x:Name="ScaleSlider" Minimum="1.0" Maximum="1.4636678" Width="300" Value="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
+                <TextBlock Text="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10">
                 <TextBlock Text="Handpositie" />
                 <Slider x:Name="HandProximitySlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandProximity, Mode=TwoWay}">

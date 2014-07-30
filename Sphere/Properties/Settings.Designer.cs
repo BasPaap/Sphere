@@ -70,5 +70,17 @@ namespace Bas.Sphere.Properties {
                 this["BarrelDistortionAmount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double Scale {
+            get {
+                return ((double)(this["Scale"]));
+            }
+            set {
+                this["Scale"] = value;
+            }
+        }
     }
 }
