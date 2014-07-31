@@ -83,10 +83,11 @@
             <local:TestImage Grid.RowSpan="2" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
                              Visibility="{Binding IsChecked, ElementName=IsTestImageVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
-
+                
         <StackPanel x:Name="ControlsStackPanel" VerticalAlignment="Bottom" Visibility="{Binding IsControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" Visibility="{Binding IsDebugControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">
 
+                <CheckBox x:Name="IsHandTrackingEnabledCheckBox" IsChecked="{Binding IsHandTrackingEnabled, Source={x:Static properties:Settings.Default}}">Handen tracken</CheckBox>
                 <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
                 <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
                 <CheckBox x:Name="IsCloudLayerTwoVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 2</CheckBox>
@@ -152,7 +153,10 @@
                     <TextBlock Text="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
                 </StackPanel>
             </StackPanel>
+            <Button x:Name="CalibrationButton" Click="CalibrationButton_Click">Kalibreer</Button>            
         </StackPanel>
+        
+        <TextBlock x:Name="CalibrationTextBlock" Visibility="Hidden" FontSize="240" HorizontalAlignment="Center" VerticalAlignment="Center">1</TextBlock>
     </Grid>
 
 </Window>

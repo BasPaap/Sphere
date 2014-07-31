@@ -10,11 +10,19 @@ namespace Bas.Sphere.HandTracking
     {
         public bool IsEnabled
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get;
+            set;
         }
 
         public event EventHandler<HandProximityChangedEventArgs> HandProximityChanged;
         public event EventHandler<VisionSummonedEventArgs> VisionSummoned;
+
+        public void Calibrate()
+        {
+            if (IsEnabled)
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

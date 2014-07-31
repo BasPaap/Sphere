@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Bas.Sphere.Properties;
+using System.Windows.Threading;
+using Bas.Sphere.HandTracking;
 
 namespace Bas.Sphere
 {
@@ -26,8 +28,37 @@ namespace Bas.Sphere
             InitializeComponent();
 
             this.DataContext = this;
+
+            this.calibrationTimer = new DispatcherTimer();
+            this.calibrationTimer.Interval = TimeSpan.FromSeconds(1);
+            this.calibrationTimer.Tick += calibrationTimer_Tick;
+
+            this.hands = new Hands();
+            this.hands.HandProximityChanged += hands_HandProximityChanged;
+            this.hands.VisionSummoned += hands_VisionSummoned;
+
+            Settings.Default.PropertyChanged += Default_PropertyChanged;
         }
 
+        void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsHandTrackingEnabled")
+            {
+                this.hands.IsEnabled = Settings.Default.IsHandTrackingEnabled;
+            }
+        }
+
+        void hands_VisionSummoned(object sender, VisionSummonedEventArgs e)
+        {
+            Vision.Type = e.Vision;
+            Vision.Reveal();            
+        }
+
+        void hands_HandProximityChanged(object sender, HandProximityChangedEventArgs e)
+        {
+            HandProximity = e.Proximity;
+        }
+        
         private void ExecuteSaveCommand(object sender, ExecutedRoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
@@ -85,6 +116,35 @@ namespace Bas.Sphere
             Vision.Reveal();
         }
 
+        private void CalibrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            CalibrationButton.IsEnabled = false;
+            this.calibrationCountDown = 3;
+            CalibrationTextBlock.Text = this.calibrationCountDown.ToString();
+            CalibrationTextBlock.Visibility = System.Windows.Visibility.Visible;
+            this.calibrationTimer.Start();
+        }
+        
+        void calibrationTimer_Tick(object sender, EventArgs e)
+        {
+            this.calibrationCountDown--;
+            CalibrationTextBlock.Text = this.calibrationCountDown.ToString();
 
+            if (this.calibrationCountDown == 0)
+            {
+                CalibrationTextBlock.Text = "!";                
+                hands.Calibrate();
+            }
+            else if (this.calibrationCountDown == -1)
+            {
+                this.calibrationTimer.Stop();
+                CalibrationTextBlock.Visibility = System.Windows.Visibility.Hidden;
+                CalibrationButton.IsEnabled = true;                
+            }
+        }
+
+        int calibrationCountDown;
+        DispatcherTimer calibrationTimer;
+        private Hands hands;
     }
 }

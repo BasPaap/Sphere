@@ -118,5 +118,17 @@ namespace Bas.Sphere.Properties {
                 this["IsProjectionControlsPanelVisible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsHandTrackingEnabled {
+            get {
+                return ((bool)(this["IsHandTrackingEnabled"]));
+            }
+            set {
+                this["IsHandTrackingEnabled"] = value;
+            }
+        }
     }
 }
