@@ -16,12 +16,12 @@
                     Modifiers="Control"
                     Command="Save" />
     </Window.InputBindings>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="Save"
                         Executed="ExecuteSaveCommand" />
     </Window.CommandBindings>
-    
+
     <Window.Resources>
 
         <ObjectDataProvider x:Key="VisionTypes" MethodName="GetValues"
@@ -38,8 +38,8 @@
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" BeginTime="0:0:2" Duration="0:0:1" From="0.75" To="1">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn"/>
-                </DoubleAnimation.EasingFunction>                
-            </DoubleAnimation>                        
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
 
         <Storyboard x:Key="ToActiveModeStoryboard">
@@ -52,19 +52,19 @@
     <Grid>
         <Grid x:Name="VisualsGrid" RenderTransformOrigin="0.5,0.5" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
             <Grid.Effect>
-                <shaders:BarrelDistortionEffect BarrelAmountX="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />    
+                <shaders:BarrelDistortionEffect BarrelAmountX="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
             </Grid.Effect>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <Grid.RenderTransform>
                 <TransformGroup>
                     <RotateTransform Angle="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
                     <ScaleTransform ScaleX="{Binding Scale, Source={x:Static properties:Settings.Default}}" ScaleY="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
-                </TransformGroup>                
+                </TransformGroup>
             </Grid.RenderTransform>
 
             <Grid ClipToBounds="True" Grid.RowSpan="2" x:Name="CloudLayerGrid" Visibility="{Binding IsChecked, ElementName=AreCloudsVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -84,68 +84,73 @@
                              Visibility="{Binding IsChecked, ElementName=IsTestImageVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
 
-        <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" VerticalAlignment="Bottom">
+        <StackPanel x:Name="ControlsStackPanel" VerticalAlignment="Bottom">
+            <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF">
 
-            <CheckBox x:Name="IsTestImageVisibleCheckBox" IsChecked="False">Testbeeld</CheckBox>
-            <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
-            <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
-            <CheckBox x:Name="IsCloudLayerTwoVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 2</CheckBox>
+                <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
+                <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
+                <CheckBox x:Name="IsCloudLayerTwoVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 2</CheckBox>
 
-            <CheckBox x:Name="IsStarburstVisibleCheckBox" IsChecked="True">Sterren</CheckBox>
+                <CheckBox x:Name="IsStarburstVisibleCheckBox" IsChecked="True">Sterren</CheckBox>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Draaisnelheid sterren" />
-                <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600" Value="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}"/>
-                <TextBlock Text="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Draaisnelheid sterren" />
+                    <Slider x:Name="StarburstRotationSpeedSlider" Minimum="0.0" Maximum="360.0" Width="600" Value="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}"/>
+                    <TextBlock Text="{Binding StarburstRotationSpeed, Source={x:Static properties:Settings.Default}}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Parallax-afstand sterren" />
+                    <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}"/>
+                    <TextBlock Text="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VisionTypes}}" SelectedItem="{Binding Type, ElementName=Vision}" />
+                    <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Handpositie" />
+                    <Slider x:Name="HandProximitySlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandProximity, Mode=TwoWay}">
+                        <Slider.Style>
+                            <Style TargetType="Slider">
+                                <Style.Triggers>
+                                    <Trigger Value="0" Property="Value">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard Name="BeginHeartbeatStoryboard"  Storyboard="{StaticResource HeartbeatStoryboard}"/>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="BeginHeartbeatStoryboard" />
+                                            <BeginStoryboard Name="BeginToActiveModeStoryboard" Storyboard="{StaticResource ToActiveModeStoryboard}" />
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Slider.Style>
+                    </Slider>
+                    <TextBlock Text="{Binding HandProximity}" />
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Parallax-afstand sterren" />
-                <Slider x:Name="ParallaxDistanceSlider" Minimum="0.0" Maximum="50.0" Width="500" Value="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}"/>
-                <TextBlock Text="{Binding StarburstParallaxDistance, Source={x:Static properties:Settings.Default}}" />
-            </StackPanel>
+            <StackPanel x:Name="ProjectionControlsStackPanel" Background="#AAFFFFFF">
+                <CheckBox x:Name="IsTestImageVisibleCheckBox" IsChecked="False">Testbeeld</CheckBox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Voorkant bol</TextBlock>
+                    <Slider x:Name="SphereFrontAngleSlider" Minimum="0" Maximum="360" Width="500" Value="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}"/>
+                    <TextBlock Text="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VisionTypes}}" SelectedItem="{Binding Type, ElementName=Vision}" />
-                <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Voorkant bol</TextBlock>
-                <Slider x:Name="SphereFrontAngleSlider" Minimum="0" Maximum="360" Width="500" Value="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}"/>
-                <TextBlock Text="{Binding SphereFrontAngle, Source={x:Static properties:Settings.Default}}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Distortion" />
-                <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
-                <TextBlock Text="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Schaal" />
-                <Slider x:Name="ScaleSlider" Minimum="1.0" Maximum="1.4636678" Width="300" Value="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
-                <TextBlock Text="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Handpositie" />
-                <Slider x:Name="HandProximitySlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding HandProximity, Mode=TwoWay}">
-                    <Slider.Style>
-                        <Style TargetType="Slider">
-                            <Style.Triggers>
-                                <Trigger Value="0" Property="Value">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard Name="BeginHeartbeatStoryboard"  Storyboard="{StaticResource HeartbeatStoryboard}"/>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <StopStoryboard BeginStoryboardName="BeginHeartbeatStoryboard" />
-                                        <BeginStoryboard Name="BeginToActiveModeStoryboard" Storyboard="{StaticResource ToActiveModeStoryboard}" />
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Slider.Style>
-                </Slider>
-                <TextBlock Text="{Binding HandProximity}" />
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Distortion" />
+                    <Slider x:Name="BarrelDistortionSlider" Minimum="0.0" Maximum="1.0" Width="300" Value="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
+                    <TextBlock Text="{Binding BarrelDistortionAmount, Source={x:Static properties:Settings.Default}}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Schaal" />
+                    <Slider x:Name="ScaleSlider" Minimum="1.0" Maximum="1.4636678" Width="300" Value="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
+                    <TextBlock Text="{Binding Scale, Source={x:Static properties:Settings.Default}}" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
