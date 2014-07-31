@@ -84,8 +84,8 @@
                              Visibility="{Binding IsChecked, ElementName=IsTestImageVisibleCheckBox, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
 
-        <StackPanel x:Name="ControlsStackPanel" VerticalAlignment="Bottom">
-            <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF">
+        <StackPanel x:Name="ControlsStackPanel" VerticalAlignment="Bottom" Visibility="{Binding IsControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel x:Name="DebugControlsStackPanel" Background="#AAFFFFFF" Visibility="{Binding IsDebugControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                 <CheckBox x:Name="AreCloudsVisibleCheckBox" IsChecked="True">Wolken</CheckBox>
                 <CheckBox x:Name="IsCloudLayerOneVisibleCheckBox" IsChecked="True" Margin="10,0">CloudLayer 1</CheckBox>
@@ -133,7 +133,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel x:Name="ProjectionControlsStackPanel" Background="#AAFFFFFF">
+            <StackPanel x:Name="ProjectionControlsStackPanel" Background="#AAFFFFFF" Visibility="{Binding IsProjectionControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <CheckBox x:Name="IsTestImageVisibleCheckBox" IsChecked="False">Testbeeld</CheckBox>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Voorkant bol</TextBlock>

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Bas.Sphere.Extensions;
+using Bas.Sphere.Properties;
 
 namespace Bas.Sphere
 {
@@ -49,13 +49,13 @@ namespace Bas.Sphere
             switch (e.Key)
             {
                 case Key.Escape:
-                    ControlsStackPanel.Visibility = ControlsStackPanel.Visibility.ToOpposite();
+                    Settings.Default.IsControlsPanelVisible = !Settings.Default.IsControlsPanelVisible;
                     break;
                 case Key.D:
-                    DebugControlsStackPanel.Visibility = DebugControlsStackPanel.Visibility.ToOpposite();
+                    Settings.Default.IsDebugControlsPanelVisible = !Settings.Default.IsDebugControlsPanelVisible;
                     break;
                 case Key.P:
-                    ProjectionControlsStackPanel.Visibility = ProjectionControlsStackPanel.Visibility.ToOpposite();
+                    Settings.Default.IsProjectionControlsPanelVisible = !Settings.Default.IsProjectionControlsPanelVisible;
                     break;
                 case Key.T:
                     IsTestImageVisibleCheckBox.IsChecked = !IsTestImageVisibleCheckBox.IsChecked;

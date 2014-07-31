@@ -82,5 +82,41 @@ namespace Bas.Sphere.Properties {
                 this["Scale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsControlsPanelVisible {
+            get {
+                return ((bool)(this["IsControlsPanelVisible"]));
+            }
+            set {
+                this["IsControlsPanelVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsDebugControlsPanelVisible {
+            get {
+                return ((bool)(this["IsDebugControlsPanelVisible"]));
+            }
+            set {
+                this["IsDebugControlsPanelVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsProjectionControlsPanelVisible {
+            get {
+                return ((bool)(this["IsProjectionControlsPanelVisible"]));
+            }
+            set {
+                this["IsProjectionControlsPanelVisible"] = value;
+            }
+        }
     }
 }
