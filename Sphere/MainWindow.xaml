@@ -131,7 +131,7 @@
                         </Slider.Style>
                     </Slider>
                     <TextBlock Text="{Binding HandProximity}" />
-                </StackPanel>
+                </StackPanel>                
             </StackPanel>
 
             <StackPanel x:Name="ProjectionControlsStackPanel" Background="#AAFFFFFF" Visibility="{Binding IsProjectionControlsPanelVisible, Source={x:Static properties:Settings.Default}, Converter={StaticResource BooleanToVisibilityConverter}}">

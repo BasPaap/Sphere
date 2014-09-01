@@ -29,7 +29,7 @@ namespace Bas.Sphere.HandTracking
             {
                 var frame = this.leapController.Frame();
                 float currentHandProximity = 0.0f;
-
+                
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
@@ -113,7 +113,7 @@ namespace Bas.Sphere.HandTracking
             if (IsEnabled)
             {
                 var frame = this.leapController.Frame();
-
+                
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {

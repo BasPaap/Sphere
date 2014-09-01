@@ -144,8 +144,8 @@ namespace Bas.Sphere
             }
         }
 
-        int calibrationCountDown;
-        DispatcherTimer calibrationTimer;
-        private Hands hands;
+        private int calibrationCountDown;
+        private DispatcherTimer calibrationTimer;
+        Hands hands;
     }
 }
