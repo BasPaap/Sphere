@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Bas.Sphere.Extensions;
+using System.Diagnostics;
 
 namespace Bas.Sphere.HandTracking
 {
@@ -16,6 +17,7 @@ namespace Bas.Sphere.HandTracking
         private DispatcherTimer timer = new DispatcherTimer();
         private float lastHandProximity = 0.0f;
         private const float maxHandDistance = 500.0f;
+        private VisionType currentVisionType = VisionType.Death;
 
         public Hands()
         {
@@ -33,15 +35,25 @@ namespace Bas.Sphere.HandTracking
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
+                    // Get the proximity of both hands to the activation zone.
                     var currentHandDistance = frame.Hands[0].StabilizedPalmPosition.DistanceTo(frame.Hands[1].StabilizedPalmPosition);
                     currentHandProximity = GetProximityFromDistance(currentHandDistance);
-
+                                        
+                    // If the proximity has changed, fire the event.
                     if (currentHandProximity != lastHandProximity &&
                         HandProximityChanged != null)
                     {
                         lastHandProximity = currentHandProximity;
                         HandProximityChanged(this, new HandProximityChangedEventArgs(currentHandProximity));
                     }
+
+                    // Test if the palms are turned upwards: if so, display the currently selected vision.
+                    if ((frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
+                         frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f) &&
+                         VisionSummoned != null)
+                    {
+                        VisionSummoned(this, new VisionSummonedEventArgs(this.currentVisionType));
+                    }                    
                 }
 
                 if (currentHandProximity != lastHandProximity &&
@@ -68,8 +80,8 @@ namespace Bas.Sphere.HandTracking
             {
                 this.leapController = new Controller();
             }
-
-            this.timer.IsEnabled = true;
+            
+            this.timer.Start();
         }
 
         private void DisconnectLeap()
@@ -79,7 +91,7 @@ namespace Bas.Sphere.HandTracking
                 this.leapController = null;
             }
 
-            this.timer.IsEnabled = false;
+            this.timer.Stop();
         }
 
         public bool IsEnabled

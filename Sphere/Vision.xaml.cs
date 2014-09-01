@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -47,11 +48,18 @@ namespace Bas.Sphere
 
         public void Reveal()
         {
-            // Start the shader effect
-            this.shaderTimer.Start();            
+            // Only start the reveal if the vision is not already being revealed.
 
-            var revealStoryboard = Resources["RevealStoryboard"] as Storyboard;
-            revealStoryboard.Begin();
+            if (!this.shaderTimer.IsEnabled)
+            {
+                Debug.WriteLine("{0}\tRevealing vision.", new [] { DateTime.Now.ToLongTimeString() });
+            
+                // Start the shader effect
+                this.shaderTimer.Start();
+
+                var revealStoryboard = Resources["RevealStoryboard"] as Storyboard;
+                revealStoryboard.Begin();
+            }
         }
 
         private void RevealStoryboard_Completed(object sender, EventArgs e)
