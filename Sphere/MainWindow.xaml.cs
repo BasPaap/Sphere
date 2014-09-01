@@ -36,7 +36,8 @@ namespace Bas.Sphere
             this.hands = new Hands();
             this.hands.HandProximityChanged += hands_HandProximityChanged;
             this.hands.VisionSummoned += hands_VisionSummoned;
-
+            this.hands.IsEnabled = Settings.Default.IsHandTrackingEnabled;
+            
             Settings.Default.PropertyChanged += Settings_PropertyChanged;
         }
 

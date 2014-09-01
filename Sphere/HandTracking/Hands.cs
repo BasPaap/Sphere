@@ -33,7 +33,7 @@ namespace Bas.Sphere.HandTracking
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
-                    var currentHandDistance = frame.Hands[0].PalmPosition.DistanceTo(frame.Hands[1].PalmPosition);
+                    var currentHandDistance = frame.Hands[0].StabilizedPalmPosition.DistanceTo(frame.Hands[1].StabilizedPalmPosition);
                     currentHandProximity = GetProximityFromDistance(currentHandDistance);
 
                     if (currentHandProximity != lastHandProximity &&
@@ -117,7 +117,7 @@ namespace Bas.Sphere.HandTracking
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
-                    Settings.Default.ActiveZoneHandDistance = frame.Hands[0].PalmPosition.DistanceTo(frame.Hands[1].PalmPosition);
+                    Settings.Default.ActiveZoneHandDistance = frame.Hands[0].StabilizedPalmPosition.DistanceTo(frame.Hands[1].StabilizedPalmPosition);
                     return true;
                 }
             }
