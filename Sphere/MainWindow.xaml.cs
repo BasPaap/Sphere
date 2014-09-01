@@ -37,10 +37,10 @@ namespace Bas.Sphere
             this.hands.HandProximityChanged += hands_HandProximityChanged;
             this.hands.VisionSummoned += hands_VisionSummoned;
 
-            Settings.Default.PropertyChanged += Default_PropertyChanged;
+            Settings.Default.PropertyChanged += Settings_PropertyChanged;
         }
 
-        void Default_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsHandTrackingEnabled")
             {
@@ -132,8 +132,8 @@ namespace Bas.Sphere
 
             if (this.calibrationCountDown == 0)
             {
-                CalibrationTextBlock.Text = "!";                
-                hands.Calibrate();
+                var calibrationSucceeded = hands.Calibrate();
+                CalibrationTextBlock.Text = calibrationSucceeded ? "!" : "?";                
             }
             else if (this.calibrationCountDown == -1)
             {

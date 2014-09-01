@@ -130,5 +130,17 @@ namespace Bas.Sphere.Properties {
                 this["IsHandTrackingEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        public float ActiveZoneHandDistance {
+            get {
+                return ((float)(this["ActiveZoneHandDistance"]));
+            }
+            set {
+                this["ActiveZoneHandDistance"] = value;
+            }
+        }
     }
 }

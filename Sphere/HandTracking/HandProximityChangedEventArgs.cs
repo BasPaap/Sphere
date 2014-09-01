@@ -7,9 +7,9 @@ namespace Bas.Sphere.HandTracking
 {
     public sealed class HandProximityChangedEventArgs : EventArgs
     {
-        public double Proximity { get; set; }
+        public float Proximity { get; set; }
 
-        public HandProximityChangedEventArgs(double proximity)
+        public HandProximityChangedEventArgs(float proximity)
         {
             Proximity = proximity;
         }
