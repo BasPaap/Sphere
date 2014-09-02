@@ -25,6 +25,11 @@ namespace Bas.Sphere.HandTracking
             this.timer.Tick += timer_Tick;
         }
 
+        private int currentHandlessFrameCount = 0;
+        private const int maxHandlessFrameCount = 30;
+
+        private Frame previousFrameWithHands = null;
+
         void timer_Tick(object sender, EventArgs e)
         {
             if (IsEnabled && this.leapController != null)
@@ -35,9 +40,28 @@ namespace Bas.Sphere.HandTracking
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
-                    currentHandProximity = GetHandProximity(frame, currentHandProximity);
-                    TestForSummonGesture(frame);
-                    TestForVisionSelectionGesture(frame);
+                    this.previousFrameWithHands = frame;
+                    this.currentHandlessFrameCount = 0;
+                }
+                else 
+                {
+                    this.currentHandlessFrameCount++;
+
+                    if (previousFrameWithHands != null)
+                    {
+                        Debug.WriteLine("Dropped Frame");
+                    }
+                    if (this.currentHandlessFrameCount > maxHandlessFrameCount)
+                    {
+                        this.previousFrameWithHands = null;
+                    }
+                }
+
+                if (previousFrameWithHands != null)
+                {
+                    currentHandProximity = GetHandProximity(this.previousFrameWithHands, currentHandProximity);
+                    TestForSummonGesture(this.previousFrameWithHands);
+                    TestForVisionSelectionGesture(this.previousFrameWithHands);
                 }
                 
                 // If the proximity has changed, fire the event.
