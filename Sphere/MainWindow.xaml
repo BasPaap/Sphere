@@ -33,6 +33,16 @@
 
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <localconverters:HandProximityToBooleanConverter x:Key="HandProximityToBooleanConverter" />
+
+        <Storyboard x:Key="HeartbeatAudioStoryboard" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0" />
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:2" Duration="0:0:1" From="0" To="1">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0.75" />
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.Target="{Binding ElementName=CloudLayerGrid}" BeginTime="0:0:2" Duration="0:0:1" From="0.75" To="1">
@@ -157,6 +167,8 @@
         </StackPanel>
         
         <TextBlock x:Name="CalibrationTextBlock" Visibility="Hidden" FontSize="240" HorizontalAlignment="Center" VerticalAlignment="Center">1</TextBlock>
+
+        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" />
     </Grid>
 
 </Window>

@@ -39,6 +39,8 @@ namespace Bas.Sphere
             this.hands.IsEnabled = Settings.Default.IsHandTrackingEnabled;
             
             Settings.Default.PropertyChanged += Settings_PropertyChanged;
+            IdleSoundMediaElement.Play();
+            PlayIdleHeartbeat();
         }
 
         void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -74,7 +76,33 @@ namespace Bas.Sphere
 
         // Using a DependencyProperty as the backing store for HandProximity.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HandProximityProperty =
-            DependencyProperty.Register("HandProximity", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
+            DependencyProperty.Register("HandProximity", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0, OnHandProximityChanged));
+
+        private static void OnHandProximityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var window = d as MainWindow;
+                
+            if ((double)e.NewValue == 0.0)
+            {
+                window.PlayIdleHeartbeat();
+            }
+            else if ((double)e.NewValue > 0.0 && (double)e.OldValue == 0.0)
+            {
+                window.StopIdleHeartbeat();
+            }
+        }
+
+        public void PlayIdleHeartbeat()
+        {
+            var storyboard = FindResource("HeartbeatAudioStoryboard") as System.Windows.Media.Animation.Storyboard;
+            storyboard.Begin();
+        }
+
+        public void StopIdleHeartbeat()
+        {
+            var storyboard = FindResource("HeartbeatAudioStoryboard") as System.Windows.Media.Animation.Storyboard;
+            storyboard.Stop();
+        }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {

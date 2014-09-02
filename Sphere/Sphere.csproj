@@ -165,6 +165,9 @@
     <None Include="ShaderEffects\barreldistortion.fx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\Idle ambience.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\ship at sea edward moran.png" />
     <Content Include="Leap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
