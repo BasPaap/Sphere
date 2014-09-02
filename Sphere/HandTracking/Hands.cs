@@ -47,10 +47,6 @@ namespace Bas.Sphere.HandTracking
                 {
                     this.currentHandlessFrameCount++;
 
-                    if (previousFrameWithHands != null)
-                    {
-                        Debug.WriteLine("Dropped Frame");
-                    }
                     if (this.currentHandlessFrameCount > maxHandlessFrameCount)
                     {
                         this.previousFrameWithHands = null;
