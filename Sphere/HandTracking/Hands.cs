@@ -77,7 +77,7 @@ namespace Bas.Sphere.HandTracking
                 }
                 else if (fists.Count() == 1)
                 {
-                    visionType = fists.First().IsLeft ? VisionType.Fortune : VisionType.Love;
+                    visionType = fists.First().IsLeft ? VisionType.Travel : VisionType.Love;
                 }
                 else
                 {

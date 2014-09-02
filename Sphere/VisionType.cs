@@ -11,6 +11,7 @@ namespace Bas.Sphere
         None = 0,
         Death,
         Love,
-        Fortune
+        Fortune,
+        Travel
     }
 }

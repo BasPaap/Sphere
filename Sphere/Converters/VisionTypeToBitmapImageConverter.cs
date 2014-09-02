@@ -27,6 +27,9 @@ namespace Bas.Sphere.Converters
                     case VisionType.Fortune:
                         fileName = "still life of coins francken.png";
                         break;
+                    case VisionType.Travel:
+                        fileName = "ship at sea edward moran.png";
+                        break;
                     case VisionType.None:
                     default:
                         break;
