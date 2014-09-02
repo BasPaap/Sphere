@@ -35,27 +35,12 @@ namespace Bas.Sphere.HandTracking
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
-                    // Get the proximity of both hands to the activation zone.
-                    var currentHandDistance = frame.Hands[0].StabilizedPalmPosition.DistanceTo(frame.Hands[1].StabilizedPalmPosition);
-                    currentHandProximity = GetProximityFromDistance(currentHandDistance);
-                                        
-                    // If the proximity has changed, fire the event.
-                    if (currentHandProximity != lastHandProximity &&
-                        HandProximityChanged != null)
-                    {
-                        lastHandProximity = currentHandProximity;
-                        HandProximityChanged(this, new HandProximityChangedEventArgs(currentHandProximity));
-                    }
-
-                    // Test if the palms are turned upwards: if so, display the currently selected vision.
-                    if ((frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
-                         frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f) &&
-                         VisionSummoned != null)
-                    {
-                        VisionSummoned(this, new VisionSummonedEventArgs(this.currentVisionType));
-                    }                    
+                    currentHandProximity = GetHandProximity(frame, currentHandProximity);
+                    TestForSummonGesture(frame);
+                    TestForVisionSelectionGesture(frame);
                 }
-
+                
+                // If the proximity has changed, fire the event.
                 if (currentHandProximity != lastHandProximity &&
                     HandProximityChanged != null)
                 {
@@ -65,6 +50,66 @@ namespace Bas.Sphere.HandTracking
             }
         }
 
+        private float GetHandProximity(Frame frame, float currentHandProximity)
+        {
+            // Get the proximity of both hands to the activation zone.
+            var currentHandDistance = frame.Hands[0].StabilizedPalmPosition.DistanceTo(frame.Hands[1].StabilizedPalmPosition);
+            currentHandProximity = GetProximityFromDistance(currentHandDistance);
+                        
+            return currentHandProximity;
+        }
+
+        private DateTime lastVisionSelectionGestureAppearanceTime = DateTime.MinValue;
+        private TimeSpan requiredVisionSelectionGestureDuration = TimeSpan.FromSeconds(0.5);
+        private VisionType potentiallySelectedVisionType = VisionType.None;
+
+        private void TestForVisionSelectionGesture(Frame frame)
+        {            
+                var fists = from h in frame.Hands
+                            where h.SphereRadius < 38.0f
+                            select h;
+
+                var visionType = VisionType.None;
+
+                if (fists.Count() == 2)
+                {
+                    visionType = VisionType.Death;
+                }
+                else if (fists.Count() == 1)
+                {
+                    visionType = fists.First().IsLeft ? VisionType.Fortune : VisionType.Love;
+                }
+                else
+                {
+                    visionType = VisionType.None;
+                }
+
+                if (visionType != this.potentiallySelectedVisionType)
+                {
+                    this.lastVisionSelectionGestureAppearanceTime = DateTime.Now;
+                    this.potentiallySelectedVisionType = visionType;
+                }
+
+                if (DateTime.Now - this.lastVisionSelectionGestureAppearanceTime >= requiredVisionSelectionGestureDuration && 
+                    this.potentiallySelectedVisionType != VisionType.None)
+                {
+                    this.currentVisionType = this.potentiallySelectedVisionType;
+                    Debug.WriteLine("{0}\tSelecting vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionType);
+                }
+            
+        }
+
+        private void TestForSummonGesture(Frame frame)
+        {
+            // Test if the palms are turned upwards: if so, display the currently selected vision.
+            if ((frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
+                 frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f) &&
+                 VisionSummoned != null)
+            {
+                VisionSummoned(this, new VisionSummonedEventArgs(this.currentVisionType));
+            }
+        }
+                
         private float GetProximityFromDistance(float currentHandDistance)
         {
             var length = maxHandDistance - Settings.Default.ActiveZoneHandDistance;
