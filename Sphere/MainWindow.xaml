@@ -172,8 +172,8 @@
         
         <TextBlock x:Name="CalibrationTextBlock" Visibility="Hidden" FontSize="240" HorizontalAlignment="Center" VerticalAlignment="Center">1</TextBlock>
 
-        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="IdleSoundMediaElement_MediaEnded" />
-        <MediaElement x:Name="StarfieldSoundMediaElement" Visibility="Collapsed" Source="Audio/Starfield ambience.wav" LoadedBehavior="Manual" Volume="1" />
+        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />
+        <MediaElement x:Name="StarfieldSoundMediaElement" Visibility="Collapsed" Source="Audio/Starfield ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />
     </Grid>
 
 </Window>

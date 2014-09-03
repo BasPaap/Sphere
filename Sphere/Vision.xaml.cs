@@ -26,6 +26,8 @@ namespace Bas.Sphere
     /// </summary>
     public partial class Vision : UserControl, INotifyPropertyChanged
     {
+        MediaPlayer visionMediaPlayer;
+
         public Vision()
         {
             InitializeComponent();
@@ -35,8 +37,11 @@ namespace Bas.Sphere
             this.shaderTimer = new DispatcherTimer(DispatcherPriority.Normal); // To stop the animation from jittering when it's not animating.
             this.shaderTimer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
             this.shaderTimer.Tick += shaderTimer_Tick;            
-        }
 
+            this.visionMediaPlayer = new MediaPlayer();
+            this.visionMediaPlayer.Open(new Uri("pack://siteoforigin:,,,/Audio/vision.wav"));
+        }
+        
         private UnderwaterWithTransparencyEffect underwaterWithTransparencyEffect;
 
         void shaderTimer_Tick(object sender, EventArgs e)
@@ -52,6 +57,9 @@ namespace Bas.Sphere
 
             if (!this.shaderTimer.IsEnabled)
             {
+                this.visionMediaPlayer.Position = TimeSpan.FromSeconds(0.0);
+                this.visionMediaPlayer.Play();
+
                 Debug.WriteLine("{0}\tRevealing vision.", new [] { DateTime.Now.ToLongTimeString() });
             
                 // Start the shader effect

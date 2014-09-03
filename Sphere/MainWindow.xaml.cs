@@ -37,7 +37,7 @@ namespace Bas.Sphere
             this.hands.HandProximityChanged += hands_HandProximityChanged;
             this.hands.VisionSummoned += hands_VisionSummoned;
             this.hands.IsEnabled = Settings.Default.IsHandTrackingEnabled;
-            
+
             Settings.Default.PropertyChanged += Settings_PropertyChanged;
             IdleSoundMediaElement.Play();
             PlayIdleHeartbeat();
@@ -96,7 +96,7 @@ namespace Bas.Sphere
             }
             else if (newValue == 1.0)
             {
-                window.IdleSoundMediaElement.Stop();
+                //window.IdleSoundMediaElement.Stop();
                 window.StarfieldSoundMediaElement.Play();
             }
         }
@@ -192,9 +192,9 @@ namespace Bas.Sphere
         private DispatcherTimer calibrationTimer;
         Hands hands;
 
-        private void IdleSoundMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        private void RepeatingMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            IdleSoundMediaElement.Play();
+            (sender as MediaElement).Play();
         }
     }
 }

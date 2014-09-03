@@ -8,8 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300"
 			 Visibility="Hidden">
 	<UserControl.Resources>
-		<Storyboard x:Key="RevealStoryboard">
+		<Storyboard x:Key="RevealStoryboard" SlipBehavior="Slip">
 
+            <MediaTimeline Source="Audio\reveal.wav" Storyboard.TargetName="RevealMediaElement" BeginTime="0:0:0.0" />
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="grid" BeginTime="0" Duration="0:0:0.5" From="0" To="1" />
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="grid" BeginTime="0" Duration="0:0:1" From="0" To="1" />
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" BeginTime="0" Duration="0" To="1" />
@@ -67,6 +68,8 @@
                 <ImageBrush ImageSource="Images/Starburst3.png" />
             </Ellipse.Fill>
         </Ellipse>
+        
+        <MediaElement x:Name="RevealMediaElement" Source="Audio\reveal.wav" LoadedBehavior="Manual" Visibility="Collapsed" />
     </Grid>
 
 </UserControl>
