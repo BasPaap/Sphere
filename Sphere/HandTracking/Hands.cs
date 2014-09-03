@@ -41,7 +41,9 @@ namespace Bas.Sphere.HandTracking
             {
                 var frame = this.leapController.Frame();
                 float currentHandProximity = 0.0f;
-                
+                float currentLeftHandProximity = 0.0f;
+                float currentRightHandProximity = 0.0f;
+
                 if (frame != null &&
                     frame.Hands.Count > 0)
                 {
@@ -66,7 +68,9 @@ namespace Bas.Sphere.HandTracking
 
                 if (previousFrameWithHands != null)
                 {
-                    currentHandProximity = GetHandProximity(this.previousFrameWithHands);
+                    currentLeftHandProximity = GetHandProximity(this.previousFrameWithHands.Hands.FirstOrDefault(h => h.IsLeft));
+                    currentRightHandProximity = GetHandProximity(this.previousFrameWithHands.Hands.FirstOrDefault(h => h.IsRight));
+                    currentHandProximity = GetTotalHandProximity(this.previousFrameWithHands);
                     TestForSummonGesture(this.previousFrameWithHands);
                     TestForVisionSelectionGesture(this.previousFrameWithHands);
                 }
@@ -76,12 +80,23 @@ namespace Bas.Sphere.HandTracking
                     HandPositionChanged != null)
                 {
                     lastHandProximity = currentHandProximity;
-                    HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity));
+                    HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity, currentLeftHandProximity, currentRightHandProximity));
                 }
             }
         }
 
-        private float GetHandProximity(Frame frame)
+        private float GetHandProximity(Hand hand)
+        {
+            if (hand != null)
+            {
+                var handDistance = hand.StabilizedPalmPosition.DistanceTo(Settings.Default.SphereCenter) - Settings.Default.SphereRadius;
+                return GetProximityFromDistance(handDistance);
+            }
+
+            return 0.0f;
+        }
+
+        private float GetTotalHandProximity(Frame frame)
         {
             const int numSupportedHands = 2;
             var totalProximity = 0.0f;
@@ -89,8 +104,7 @@ namespace Bas.Sphere.HandTracking
             // Get the proximity, which is a product of both hands' distance to the edge of the sphere.
             foreach (var hand in frame.Hands.Take(numSupportedHands))
             {
-                var handDistance = hand.StabilizedPalmPosition.DistanceTo(Settings.Default.SphereCenter) - Settings.Default.SphereRadius;
-                totalProximity += GetProximityFromDistance(handDistance) / (float)numSupportedHands; // Divide by the number of supported hands so that one hand can only activate it halfway.
+                totalProximity += GetHandProximity(hand) / (float)numSupportedHands; // Divide by the number of supported hands so that one hand can only activate it halfway.
             }
 
             return totalProximity;
