@@ -86,18 +86,12 @@ namespace Bas.Sphere
                 
             if (newValue == 0.0)
             {
-                window.StarfieldSoundMediaElement.Stop();
                 window.IdleSoundMediaElement.Play();
                 window.PlayIdleHeartbeat();
             }
             else if (newValue > 0.0 && oldValue == 0.0)
             {
                 window.StopIdleHeartbeat();
-            }
-            else if (newValue == 1.0)
-            {
-                //window.IdleSoundMediaElement.Stop();
-                window.StarfieldSoundMediaElement.Play();
             }
         }
 

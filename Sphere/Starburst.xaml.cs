@@ -78,15 +78,15 @@ namespace Bas.Sphere
             {
                 starburst.timer.Start();
                 revealStoryboard.Begin();
+                starburst.AmbientSoundMediaElement.Play();
             }
             else
             {
+                starburst.AmbientSoundMediaElement.Stop();                
                 dissolveStoryboard.Begin();
             }
         }
-
-
-
+        
         public double ParallaxDistance
         {
             get { return (double)GetValue(ParallaxDistanceProperty); }
@@ -174,6 +174,11 @@ namespace Bas.Sphere
         private void DissolveStoryboard_Completed(object sender, EventArgs e)
         {
             this.timer.Stop();
+        }
+        
+        private void RepeatingMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            (sender as MediaElement).Play();
         }
     }
 }
