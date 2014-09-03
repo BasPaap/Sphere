@@ -100,8 +100,15 @@ namespace Bas.Sphere
 
         public void StopIdleHeartbeat()
         {
-            var storyboard = FindResource("HeartbeatAudioStoryboard") as System.Windows.Media.Animation.Storyboard;
-            storyboard.Stop();
+            var idleStoryboard = FindResource("HeartbeatAudioStoryboard") as System.Windows.Media.Animation.Storyboard;
+
+            // Stop the storyboard, and make sure the volume stays at the level it was when the animation stopped.
+            var volumeWhenAnimationStopped = IdleSoundMediaElement.Volume;
+            idleStoryboard.Stop();
+            IdleSoundMediaElement.Volume = volumeWhenAnimationStopped;
+
+            var toActiveStoryboard = FindResource("HeartbeatIdleToActiveStoryboard") as System.Windows.Media.Animation.Storyboard;
+            toActiveStoryboard.Begin();
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -175,5 +182,10 @@ namespace Bas.Sphere
         private int calibrationCountDown;
         private DispatcherTimer calibrationTimer;
         Hands hands;
+
+        private void IdleSoundMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            IdleSoundMediaElement.Play();
+        }
     }
 }

@@ -35,12 +35,16 @@
         <localconverters:HandProximityToBooleanConverter x:Key="HandProximityToBooleanConverter" />
 
         <Storyboard x:Key="HeartbeatAudioStoryboard" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0" />
-            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:2" Duration="0:0:1" From="0" To="1">
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0.5" />
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:2" Duration="0:0:1" From="0.5" To="1">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+        </Storyboard>
+        
+        <Storyboard x:Key="HeartbeatIdleToActiveStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.Target="{Binding ElementName=IdleSoundMediaElement}" BeginTime="0:0:0" Duration="0:0:1" To="1" />            
         </Storyboard>
         
         <Storyboard x:Key="HeartbeatStoryboard" RepeatBehavior="Forever">
@@ -168,7 +172,7 @@
         
         <TextBlock x:Name="CalibrationTextBlock" Visibility="Hidden" FontSize="240" HorizontalAlignment="Center" VerticalAlignment="Center">1</TextBlock>
 
-        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" />
+        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="IdleSoundMediaElement_MediaEnded" />
     </Grid>
 
 </Window>
