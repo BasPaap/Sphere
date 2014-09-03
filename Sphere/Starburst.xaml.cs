@@ -82,7 +82,6 @@ namespace Bas.Sphere
             }
             else
             {
-                starburst.AmbientSoundMediaElement.Stop();                
                 dissolveStoryboard.Begin();
             }
         }
@@ -174,6 +173,7 @@ namespace Bas.Sphere
         private void DissolveStoryboard_Completed(object sender, EventArgs e)
         {
             this.timer.Stop();
+            AmbientSoundMediaElement.Stop();                                
         }
         
         private void RepeatingMediaElement_MediaEnded(object sender, RoutedEventArgs e)

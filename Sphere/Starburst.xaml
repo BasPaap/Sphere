@@ -20,7 +20,8 @@
 		</Storyboard>
         
 		<Storyboard x:Key="DissolveStoryboard" Completed="DissolveStoryboard_Completed">
-			<DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" BeginTime="0" Duration="0:0:1" From="1" To="0">
+            <DoubleAnimation Storyboard.TargetProperty="(MediaElement.Volume)" Storyboard.TargetName="AmbientSoundMediaElement" BeginTime="0:0:0" Duration="0:0:1" From="1" To="0" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" BeginTime="0" Duration="0:0:1" From="1" To="0">
 					<DoubleAnimation.EasingFunction>
 						<PowerEase EasingMode="EaseIn"/>
 					</DoubleAnimation.EasingFunction>
