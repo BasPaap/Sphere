@@ -81,14 +81,23 @@ namespace Bas.Sphere
         private static void OnHandProximityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var window = d as MainWindow;
+            var oldValue = (double)e.OldValue;
+            var newValue = (double)e.NewValue;
                 
-            if ((double)e.NewValue == 0.0)
+            if (newValue == 0.0)
             {
+                window.StarfieldSoundMediaElement.Stop();
+                window.IdleSoundMediaElement.Play();
                 window.PlayIdleHeartbeat();
             }
-            else if ((double)e.NewValue > 0.0 && (double)e.OldValue == 0.0)
+            else if (newValue > 0.0 && oldValue == 0.0)
             {
                 window.StopIdleHeartbeat();
+            }
+            else if (newValue == 1.0)
+            {
+                window.IdleSoundMediaElement.Stop();
+                window.StarfieldSoundMediaElement.Play();
             }
         }
 
