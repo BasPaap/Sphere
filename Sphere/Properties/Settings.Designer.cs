@@ -133,13 +133,24 @@ namespace Bas.Sphere.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150")]
-        public float ActiveZoneHandDistance {
+        public global::Leap.Vector SphereCenter {
             get {
-                return ((float)(this["ActiveZoneHandDistance"]));
+                return ((global::Leap.Vector)(this["SphereCenter"]));
             }
             set {
-                this["ActiveZoneHandDistance"] = value;
+                this["SphereCenter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public float SphereRadius {
+            get {
+                return ((float)(this["SphereRadius"]));
+            }
+            set {
+                this["SphereRadius"] = value;
             }
         }
     }

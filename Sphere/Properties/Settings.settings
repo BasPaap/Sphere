@@ -29,8 +29,11 @@
     <Setting Name="IsHandTrackingEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ActiveZoneHandDistance" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">150</Value>
+    <Setting Name="SphereCenter" Type="Leap.Vector" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SphereRadius" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>
