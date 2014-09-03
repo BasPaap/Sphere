@@ -60,7 +60,7 @@
     <Compile Include="Converters\DivisionConverter.cs" />
     <Compile Include="Converters\HandProximityToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
-    <Compile Include="HandTracking\HandProximityChangedEventArgs.cs" />
+    <Compile Include="HandTracking\HandPositionChangedEventArgs.cs" />
     <Compile Include="HandTracking\Hands.cs" />
     <Compile Include="HandTracking\VisionSummonedEventArgs.cs" />
     <Compile Include="ShaderEffects\BarrelDistortionEffect.cs" />

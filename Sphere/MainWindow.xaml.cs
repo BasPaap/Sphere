@@ -34,7 +34,7 @@ namespace Bas.Sphere
             this.calibrationTimer.Tick += calibrationTimer_Tick;
 
             this.hands = new Hands();
-            this.hands.HandProximityChanged += hands_HandProximityChanged;
+            this.hands.HandPositionChanged += hands_HandPositionChanged;
             this.hands.VisionSummoned += hands_VisionSummoned;
             this.hands.IsEnabled = Settings.Default.IsHandTrackingEnabled;
 
@@ -57,9 +57,9 @@ namespace Bas.Sphere
             Vision.Reveal();            
         }
 
-        void hands_HandProximityChanged(object sender, HandProximityChangedEventArgs e)
+        void hands_HandPositionChanged(object sender, HandPositionChangedEventArgs e)
         {
-            HandProximity = e.Proximity;
+            HandProximity = e.TotalProximity;
         }
         
         private void ExecuteSaveCommand(object sender, ExecutedRoutedEventArgs e)

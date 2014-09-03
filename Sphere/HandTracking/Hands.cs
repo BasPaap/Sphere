@@ -73,10 +73,10 @@ namespace Bas.Sphere.HandTracking
                 
                 // If the proximity has changed, fire the event.
                 if (currentHandProximity != lastHandProximity &&
-                    HandProximityChanged != null)
+                    HandPositionChanged != null)
                 {
                     lastHandProximity = currentHandProximity;
-                    HandProximityChanged(this, new HandProximityChangedEventArgs(currentHandProximity));
+                    HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity));
                 }
             }
         }
@@ -196,7 +196,7 @@ namespace Bas.Sphere.HandTracking
             }
         }
 
-        public event EventHandler<HandProximityChangedEventArgs> HandProximityChanged; // Wordt gefired als er een wijziging in de handproximity is
+        public event EventHandler<HandPositionChangedEventArgs> HandPositionChanged; // Wordt gefired als er een wijziging in de handen is
         public event EventHandler<VisionSummonedEventArgs> VisionSummoned; // Wordt gefired als iemand een bepaald vision-gebaar maakt.
 
         /// <summary>
