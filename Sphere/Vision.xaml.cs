@@ -57,7 +57,7 @@ namespace Bas.Sphere
 
             if (!this.shaderTimer.IsEnabled)
             {
-                this.visionMediaPlayer.Position = TimeSpan.FromSeconds(0.0);
+                this.visionMediaPlayer.Position = TimeSpan.Zero;
                 this.visionMediaPlayer.Play();
 
                 Debug.WriteLine("{0}\tRevealing vision.", new [] { DateTime.Now.ToLongTimeString() });

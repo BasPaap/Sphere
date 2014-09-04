@@ -78,9 +78,9 @@ namespace Bas.Sphere.HandTracking
                 }
                 
                 // If the proximity has changed, fire the event.
-                if (currentHandProximity != lastHandProximity &&
-                    currentLeftHandProximity != lastLeftHandProximity &&
-                    currentRightHandProximity != lastRightHandProximity &&
+                if ((currentHandProximity != lastHandProximity ||
+                    currentLeftHandProximity != lastLeftHandProximity ||
+                    currentRightHandProximity != lastRightHandProximity) &&
                     HandPositionChanged != null)
                 {
                     lastHandProximity = currentHandProximity;

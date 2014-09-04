@@ -178,7 +178,9 @@ namespace Bas.Sphere
         
         private void RepeatingMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            (sender as MediaElement).Play();
+            var mediaElement = (sender as MediaElement);
+            mediaElement.Position = TimeSpan.Zero;
+            mediaElement.Play();
         }
     }
 }

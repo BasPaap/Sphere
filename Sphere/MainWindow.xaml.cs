@@ -40,6 +40,8 @@ namespace Bas.Sphere
 
             Settings.Default.PropertyChanged += Settings_PropertyChanged;
             IdleSoundMediaElement.Play();
+            LeftHandSoundMediaElement.Play();
+            RightHandSoundMediaElement.Play();
             PlayIdleHeartbeat();
         }
 
@@ -214,7 +216,9 @@ namespace Bas.Sphere
 
         private void RepeatingMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            (sender as MediaElement).Play();
+            var mediaElement = sender as MediaElement;
+            mediaElement.Position = TimeSpan.Zero;
+            mediaElement.Play();
         }
     }
 }
