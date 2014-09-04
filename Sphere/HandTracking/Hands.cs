@@ -28,7 +28,7 @@ namespace Bas.Sphere.HandTracking
 
             if (Settings.Default.SphereCenter == null)
             {
-                Settings.Default.SphereCenter = Vector.Zero;                
+                Settings.Default.SphereCenter = Vector.Zero;
             }
         }
 
@@ -46,36 +46,17 @@ namespace Bas.Sphere.HandTracking
                 float currentLeftHandProximity = 0.0f;
                 float currentRightHandProximity = 0.0f;
 
-                if (frame != null &&
-                    frame.Hands.Count > 0)
-                {
-                    Debug.WriteLine("{0}\tNew frame, {1} hands.", DateTime.Now.ToLongTimeString(), frame.Hands.Count);
-                    this.previousFrameWithHands = frame;
-                    this.currentHandlessFrameCount = 0;
-                }
-                else 
-                {
-                    if (frame != null)
-                    {
-                        Debug.WriteLine("{0}\tprevious frame, {1} hands.", DateTime.Now.ToLongTimeString(), frame.Hands.Count);
-                    }
+                var actualLeftHandProximity = (frame != null) ? GetHandProximity(frame.Hands.FirstOrDefault(h => h.IsLeft)) : 0.0f;
+                var actualRightHandProximity = (frame != null) ? GetHandProximity(frame.Hands.FirstOrDefault(h => h.IsRight)) : 0.0f;
 
-                    this.currentHandlessFrameCount++;
+                currentLeftHandProximity = GetSmoothedProximity(actualLeftHandProximity, lastLeftHandProximity);
+                currentRightHandProximity = GetSmoothedProximity(actualRightHandProximity, lastRightHandProximity);
 
-                    if (this.currentHandlessFrameCount > maxHandlessFrameCount)
-                    {
-                        this.previousFrameWithHands = null;
-                    }
-                }
-
-                if (previousFrameWithHands != null)
-                {
-                    currentLeftHandProximity = GetHandProximity(this.previousFrameWithHands.Hands.FirstOrDefault(h => h.IsLeft));
-                    currentRightHandProximity = GetHandProximity(this.previousFrameWithHands.Hands.FirstOrDefault(h => h.IsRight));
-                    currentHandProximity = GetTotalHandProximity(this.previousFrameWithHands);
-                    TestForSummonGesture(this.previousFrameWithHands);
-                    TestForVisionSelectionGesture(this.previousFrameWithHands);
-                }
+                const float numSupportedHands = 2.0f;
+                currentHandProximity = currentLeftHandProximity / numSupportedHands + currentRightHandProximity / numSupportedHands; // GetTotalHandProximity(this.previousFrameWithHands);
+                Debug.WriteLine(currentHandProximity);
+                TestForSummonGesture(frame);
+                TestForVisionSelectionGesture(frame);
                 
                 // If the proximity has changed, fire the event.
                 if ((currentHandProximity != lastHandProximity ||
@@ -88,6 +69,31 @@ namespace Bas.Sphere.HandTracking
                     lastRightHandProximity = currentRightHandProximity;
                     HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity, currentLeftHandProximity, currentRightHandProximity));
                 }
+            }
+        }
+
+        private float GetSmoothedProximity(float targetProximity, float currentProximity)
+        {
+            if (targetProximity != currentProximity)
+            {
+                if (targetProximity > currentProximity)
+                {
+                    var step = (float)timer.Interval.TotalSeconds;
+                    var smoothedProximity = currentProximity + step;
+
+                    return (smoothedProximity <= targetProximity) ? smoothedProximity : targetProximity;
+                }
+                else
+                {
+                    var step = 0.0f - (float)timer.Interval.TotalSeconds;
+                    var smoothedProximity = currentProximity + step;
+
+                    return (smoothedProximity >= targetProximity) ? smoothedProximity : targetProximity;
+                }
+            }
+            else
+            {
+                return currentProximity;
             }
         }
 
@@ -121,7 +127,9 @@ namespace Bas.Sphere.HandTracking
         private VisionType potentiallySelectedVisionType = VisionType.None;
 
         private void TestForVisionSelectionGesture(Frame frame)
-        {            
+        {
+            if (frame != null)
+            {
                 var fists = from h in frame.Hands
                             where h.SphereRadius < 38.0f
                             select h;
@@ -147,28 +155,28 @@ namespace Bas.Sphere.HandTracking
                     this.potentiallySelectedVisionType = visionType;
                 }
 
-                if (DateTime.Now - this.lastVisionSelectionGestureAppearanceTime >= requiredVisionSelectionGestureDuration && 
+                if (DateTime.Now - this.lastVisionSelectionGestureAppearanceTime >= requiredVisionSelectionGestureDuration &&
                     this.potentiallySelectedVisionType != VisionType.None)
                 {
                     this.currentVisionType = this.potentiallySelectedVisionType;
                     Debug.WriteLine("{0}\tSelecting vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionType);
                 }
-            
+            }
         }
 
         private void TestForSummonGesture(Frame frame)
         {
             // Test if the palms are turned upwards: if so, display the currently selected vision.
             if (VisionSummoned != null &&
+                frame != null &&
                 frame.Hands.Count == 2 &&
                 frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
                 frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f)
-                
             {
                 VisionSummoned(this, new VisionSummonedEventArgs(this.currentVisionType));
             }
         }
-                
+
         private float GetProximityFromDistance(float currentHandDistanceToEdge)
         {
             // Proximity is 1 if we are touching the edge, 0 if we are the maximum distance away from the edge.
@@ -182,7 +190,7 @@ namespace Bas.Sphere.HandTracking
             {
                 this.leapController = new Controller();
             }
-            
+
             this.timer.Start();
         }
 
@@ -227,7 +235,7 @@ namespace Bas.Sphere.HandTracking
             if (IsEnabled)
             {
                 var frame = this.leapController.Frame();
-                
+
                 if (frame != null &&
                     frame.Hands.Count == 2)
                 {
