@@ -16,6 +16,8 @@ namespace Bas.Sphere.HandTracking
         private Controller leapController;
         private DispatcherTimer timer = new DispatcherTimer();
         private float lastHandProximity = 0.0f;
+        private float lastLeftHandProximity = 0.0f;
+        private float lastRightHandProximity = 0.0f;
         private const float maxHandDistanceToEdge = 200.0f;
         private VisionType currentVisionType = VisionType.Death;
 
@@ -77,9 +79,13 @@ namespace Bas.Sphere.HandTracking
                 
                 // If the proximity has changed, fire the event.
                 if (currentHandProximity != lastHandProximity &&
+                    currentLeftHandProximity != lastLeftHandProximity &&
+                    currentRightHandProximity != lastRightHandProximity &&
                     HandPositionChanged != null)
                 {
                     lastHandProximity = currentHandProximity;
+                    lastLeftHandProximity = currentLeftHandProximity;
+                    lastRightHandProximity = currentRightHandProximity;
                     HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity, currentLeftHandProximity, currentRightHandProximity));
                 }
             }
