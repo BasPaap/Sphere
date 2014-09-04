@@ -172,7 +172,9 @@
         
         <TextBlock x:Name="CalibrationTextBlock" Visibility="Hidden" FontSize="240" HorizontalAlignment="Center" VerticalAlignment="Center">1</TextBlock>
 
-        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />        
+        <MediaElement x:Name="IdleSoundMediaElement" Visibility="Collapsed" Source="Audio/Idle ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />
+        <MediaElement x:Name="LeftHandSoundMediaElement" Visibility="Collapsed" Source="Audio/Lefthand.wav" LoadedBehavior="Manual" Volume="{Binding LeftHandProximity}" MediaEnded="RepeatingMediaElement_MediaEnded" Balance="-1" />
+        <MediaElement x:Name="RightHandSoundMediaElement" Visibility="Collapsed" Source="Audio/Righthand.wav" LoadedBehavior="Manual" Volume="{Binding RightHandProximity}" MediaEnded="RepeatingMediaElement_MediaEnded" Balance="1" />
     </Grid>
 
 </Window>
