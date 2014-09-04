@@ -60,6 +60,8 @@ namespace Bas.Sphere
         void hands_HandPositionChanged(object sender, HandPositionChangedEventArgs e)
         {
             HandProximity = e.TotalProximity;
+            LeftHandProximity = e.LeftHandProximity;
+            RightHandProximity = e.RightHandProximity;
         }
         
         private void ExecuteSaveCommand(object sender, ExecutedRoutedEventArgs e)
@@ -67,6 +69,30 @@ namespace Bas.Sphere
             Properties.Settings.Default.Save();
             MessageBox.Show("Opgeslagen!", "Sphere", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+
+
+        public double LeftHandProximity
+        {
+            get { return (double)GetValue(LeftHandProximityProperty); }
+            set { SetValue(LeftHandProximityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LeftHandProximity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LeftHandProximityProperty =
+            DependencyProperty.Register("LeftHandProximity", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
+        
+
+        public double RightHandProximity
+        {
+            get { return (double)GetValue(RightHandProximityProperty); }
+            set { SetValue(RightHandProximityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RightHandProximity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightHandProximityProperty =
+            DependencyProperty.Register("RightHandProximity", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0));
+                
 
         public double HandProximity
         {
