@@ -72,8 +72,6 @@ namespace Bas.Sphere
             MessageBox.Show("Opgeslagen!", "Sphere", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-
-
         public double LeftHandProximity
         {
             get { return (double)GetValue(LeftHandProximityProperty); }

@@ -67,7 +67,7 @@ namespace Bas.Sphere.HandTracking
                     lastHandProximity = currentHandProximity;
                     lastLeftHandProximity = currentLeftHandProximity;
                     lastRightHandProximity = currentRightHandProximity;
-                    HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity, currentLeftHandProximity, currentRightHandProximity));
+                    HandPositionChanged(this, new HandPositionChangedEventArgs(currentHandProximity, currentLeftHandProximity, currentRightHandProximity));                    
                 }
             }
         }

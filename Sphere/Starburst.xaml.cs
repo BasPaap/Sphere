@@ -76,9 +76,9 @@ namespace Bas.Sphere
 
             if ((bool)e.NewValue == true)
             {
+                starburst.AmbientSoundMediaElement.Play();
                 starburst.timer.Start();
                 revealStoryboard.Begin();
-                starburst.AmbientSoundMediaElement.Play();
             }
             else
             {
