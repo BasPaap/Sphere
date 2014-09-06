@@ -30,6 +30,12 @@ namespace Bas.Sphere.Converters
                     case VisionType.Travel:
                         fileName = "ship at sea edward moran.png";
                         break;
+                    case VisionType.Treasure:
+                        fileName = "treasure.png";
+                        break;
+                    case VisionType.Logo:
+                        fileName = "logo.png";
+                        break;
                     case VisionType.None:
                     default:
                         break;

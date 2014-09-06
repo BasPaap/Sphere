@@ -142,7 +142,7 @@ namespace Bas.Sphere.HandTracking
                 }
                 else if (fists.Count() == 1)
                 {
-                    visionType = fists.First().IsLeft ? VisionType.Travel : VisionType.Love;
+                    visionType = fists.First().IsLeft ? VisionType.Treasure : VisionType.Logo;
                 }
                 else
                 {

@@ -12,6 +12,8 @@ namespace Bas.Sphere
         Death,
         Love,
         Fortune,
-        Travel
+        Travel,
+        Treasure,
+        Logo
     }
 }

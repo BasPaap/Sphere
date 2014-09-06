@@ -184,6 +184,8 @@
     <Content Include="Audio\vision.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\treasure.png" />
+    <Resource Include="Images\logo.png" />
     <Content Include="Leap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
