@@ -19,8 +19,10 @@ namespace Bas.Sphere.HandTracking
         private float lastLeftHandProximity = 0.0f;
         private float lastRightHandProximity = 0.0f;
         private const float maxHandDistanceToEdge = 200.0f;
-        private VisionType currentVisionType = VisionType.Death;
-
+        private bool isSelectingVision = false;
+        private VisionType[] availableVisionTypes = new VisionType[] { VisionType.Death, VisionType.Treasure, VisionType.Travel };
+        private int currentVisionTypeIndex = 0;
+        
         public Hands()
         {
             this.timer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
@@ -130,37 +132,47 @@ namespace Bas.Sphere.HandTracking
         {
             if (frame != null)
             {
-                var fists = from h in frame.Hands
-                            where h.SphereRadius < 38.0f
-                            select h;
+                var leftHand = frame.Hands.SingleOrDefault(h => h.IsLeft);
+                var rightHand = frame.Hands.SingleOrDefault(h => h.IsRight);
 
-                var visionType = VisionType.None;
+                if (leftHand != null && rightHand != null)
+                {
+                    if (rightHand.StabilizedPalmPosition.x < leftHand.StabilizedPalmPosition.x)
+                    {
+                        // Hands are crossed.
+                        
+                        if (!this.isSelectingVision)
+                        {
+                            this.isSelectingVision = true;
+                            
+                            // Test which hand is higher
+                            if (rightHand.StabilizedPalmPosition.y > leftHand.StabilizedPalmPosition.y)
+                            {
+                                // Right hand is crossed over left.
+                                // We use this gesture to select the next vision. 
+                                this.currentVisionTypeIndex = (this.currentVisionTypeIndex < this.availableVisionTypes.Length) ? this.currentVisionTypeIndex + 1 : 0;
+                                Debug.WriteLine("{0}\tHands crossed right over left, selected vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionTypeIndex);
+                            }
+                            else
+                            {
+                                // Left hand is crossed over right.
+                                // We use this gesture to reset the vision to the first one.
+                                this.currentVisionTypeIndex = 0;
+                                Debug.WriteLine("{0}\tHands crossed left over right, reset vision to {1}", DateTime.Now.ToLongTimeString(), this.currentVisionTypeIndex);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (this.isSelectingVision)
+                        {
+                            // Hands are no longer crossed, so we're no longer selecting anything.
+                            this.isSelectingVision = false;
+                            Debug.WriteLine("{0}\tNo longer crossed.", DateTime.Now.ToLongTimeString());
+                        }                        
+                    }
+                }
 
-                if (fists.Count() == 2)
-                {
-                    visionType = VisionType.Death;
-                }
-                else if (fists.Count() == 1)
-                {
-                    visionType = fists.First().IsLeft ? VisionType.Treasure : VisionType.Logo;
-                }
-                else
-                {
-                    visionType = VisionType.None;
-                }
-
-                if (visionType != this.potentiallySelectedVisionType)
-                {
-                    this.lastVisionSelectionGestureAppearanceTime = DateTime.Now;
-                    this.potentiallySelectedVisionType = visionType;
-                }
-
-                if (DateTime.Now - this.lastVisionSelectionGestureAppearanceTime >= requiredVisionSelectionGestureDuration &&
-                    this.potentiallySelectedVisionType != VisionType.None)
-                {
-                    this.currentVisionType = this.potentiallySelectedVisionType;
-                    Debug.WriteLine("{0}\tSelecting vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionType);
-                }
             }
         }
 
@@ -173,7 +185,7 @@ namespace Bas.Sphere.HandTracking
                 frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
                 frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f)
             {
-                VisionSummoned(this, new VisionSummonedEventArgs(this.currentVisionType));
+                VisionSummoned(this, new VisionSummonedEventArgs(this.availableVisionTypes[this.currentVisionTypeIndex]));
             }
         }
 
