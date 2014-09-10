@@ -73,7 +73,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <Ellipse Fill="Black" Opacity="{Binding Brightness, ElementName=UserControl, Converter={StaticResource BrightnessToOpacityConverter}, ConverterParameter='0.75'}" />
+        <Ellipse Fill="Black" Opacity="{Binding Brightness, ElementName=UserControl, Converter={StaticResource BrightnessToOpacityConverter}, ConverterParameter='0.6'}" />
         
         <MediaElement x:Name="RevealMediaElement" Source="Audio\reveal.wav" LoadedBehavior="Manual" Visibility="Collapsed" />
         <MediaElement x:Name="AmbientSoundMediaElement" Visibility="Collapsed" Source="Audio/Starfield ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />
