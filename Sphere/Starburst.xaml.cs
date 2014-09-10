@@ -58,6 +58,17 @@ namespace Bas.Sphere
 
 
 
+        public double Brightness
+        {
+            get { return (double)GetValue(BrightnessProperty); }
+            set { SetValue(BrightnessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Brightness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BrightnessProperty =
+            DependencyProperty.Register("Brightness", typeof(double), typeof(Starburst), new PropertyMetadata(1.0));
+        
+
         public Boolean IsRevealed
         {
             get { return (Boolean)GetValue(IsRevealedProperty); }

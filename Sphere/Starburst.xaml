@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Bas.Sphere.Converters"
              mc:Ignorable="d" 
              x:Name="UserControl"
              d:DesignHeight="300" d:DesignWidth="300"
 			 Visibility="Hidden">
 	<UserControl.Resources>
+        <converters:BrightnessToOpacityConverter x:Key="BrightnessToOpacityConverter" />
 		<Storyboard x:Key="RevealStoryboard" SlipBehavior="Slip">
 
             <MediaTimeline Source="Audio\reveal.wav" Storyboard.TargetName="RevealMediaElement" BeginTime="0:0:0.0" />
@@ -17,6 +19,7 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="UserControl">
 				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
 			</ObjectAnimationUsingKeyFrames>
+            
 		</Storyboard>
         
 		<Storyboard x:Key="DissolveStoryboard" Completed="DissolveStoryboard_Completed">
@@ -69,6 +72,8 @@
                 <ImageBrush ImageSource="Images/Starburst3.png" />
             </Ellipse.Fill>
         </Ellipse>
+
+        <Ellipse Fill="Black" Opacity="{Binding Brightness, ElementName=UserControl, Converter={StaticResource BrightnessToOpacityConverter}, ConverterParameter='0.75'}" />
         
         <MediaElement x:Name="RevealMediaElement" Source="Audio\reveal.wav" LoadedBehavior="Manual" Visibility="Collapsed" />
         <MediaElement x:Name="AmbientSoundMediaElement" Visibility="Collapsed" Source="Audio/Starfield ambience.wav" LoadedBehavior="Manual" Volume="1" MediaEnded="RepeatingMediaElement_MediaEnded" />

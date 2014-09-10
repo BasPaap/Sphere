@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BrightnessToOpacityConverter.cs" />
     <Compile Include="Converters\DivisionConverter.cs" />
     <Compile Include="Converters\HandProximityToBooleanConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
