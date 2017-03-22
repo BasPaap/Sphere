@@ -11,6 +11,10 @@
              x:Name="LayoutRoot"
              Visibility="Hidden">
 	<UserControl.Resources>
+        <Storyboard x:Key="HideStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot" BeginTime="0" Duration="0:0:1" From="0.8" To="0" />
+        </Storyboard>
+        
 		<Storyboard x:Key="RevealStoryboard" Completed="RevealStoryboard_Completed" >
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot" BeginTime="0" Duration="0:0:3.5" From="0" To="0.8" />
             <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot" BeginTime="0:0:8.5" Duration="0:0:1" From="0.8" To="0" />

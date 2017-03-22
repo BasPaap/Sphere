@@ -123,6 +123,7 @@ namespace Bas.Sphere
 
         public void PlayIdleHeartbeat()
         {
+            Vision.Hide();
             var storyboard = FindResource("HeartbeatAudioStoryboard") as System.Windows.Media.Animation.Storyboard;
             storyboard.Begin();
         }

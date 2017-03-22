@@ -70,6 +70,12 @@ namespace Bas.Sphere
             }
         }
 
+        public void Hide()
+        {
+            var hideStoryboard = Resources["HideStoryboard"] as Storyboard;
+            hideStoryboard.Begin();
+        }
+
         private void RevealStoryboard_Completed(object sender, EventArgs e)
         {
             // Disable the shader effect to preserve resources
