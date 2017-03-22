@@ -132,9 +132,9 @@ namespace Bas.Sphere.HandTracking
         {
             if (frame != null)
             {
-                var leftHand = frame.Hands.SingleOrDefault(h => h.IsLeft);
-                var rightHand = frame.Hands.SingleOrDefault(h => h.IsRight);
-
+                var leftHand = frame.Hands.FirstOrDefault(h => h.IsLeft);
+                var rightHand = frame.Hands.FirstOrDefault(h => h.IsRight);
+                
                 if (leftHand != null && rightHand != null)
                 {
                     if (rightHand.StabilizedPalmPosition.x < leftHand.StabilizedPalmPosition.x)
@@ -150,7 +150,7 @@ namespace Bas.Sphere.HandTracking
                             {
                                 // Right hand is crossed over left.
                                 // We use this gesture to select the next vision. 
-                                this.currentVisionTypeIndex = (this.currentVisionTypeIndex < this.availableVisionTypes.Length) ? this.currentVisionTypeIndex + 1 : 0;
+                                this.currentVisionTypeIndex = (this.currentVisionTypeIndex < this.availableVisionTypes.Length - 1) ? this.currentVisionTypeIndex + 1 : 0;
                                 Debug.WriteLine("{0}\tHands crossed right over left, selected vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionTypeIndex);
                             }
                             else
@@ -185,6 +185,12 @@ namespace Bas.Sphere.HandTracking
                 frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
                 frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f)
             {
+                if (this.currentVisionTypeIndex >= this.availableVisionTypes.Length)
+                {
+                    // Just to make sure we don't go out of bounds.
+                    this.currentVisionTypeIndex = 0;
+                }
+
                 VisionSummoned(this, new VisionSummonedEventArgs(this.availableVisionTypes[this.currentVisionTypeIndex]));
             }
         }
