@@ -28,7 +28,7 @@ namespace Bas.Sphere
             InitializeComponent();
 
             this.DataContext = this;
-
+                        
             this.calibrationTimer = new DispatcherTimer();
             this.calibrationTimer.Interval = TimeSpan.FromSeconds(1);
             this.calibrationTimer.Tick += calibrationTimer_Tick;
@@ -55,7 +55,7 @@ namespace Bas.Sphere
 
         void hands_VisionSummoned(object sender, VisionSummonedEventArgs e)
         {
-            Vision.Type = e.Vision;
+            Vision.FileName = e.FileName;
             Vision.Reveal();            
         }
 

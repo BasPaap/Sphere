@@ -61,6 +61,7 @@
     <Compile Include="Converters\BrightnessToOpacityConverter.cs" />
     <Compile Include="Converters\DivisionConverter.cs" />
     <Compile Include="Converters\HandProximityToBooleanConverter.cs" />
+    <Compile Include="Converters\FileNameToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisionTypeToBitmapImageConverter.cs" />
     <Compile Include="HandTracking\HandPositionChangedEventArgs.cs" />
     <Compile Include="HandTracking\Hands.cs" />
@@ -170,7 +171,9 @@
     <Content Include="Audio\Idle ambience.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\ship at sea edward moran.png" />
+    <Content Include="Images\ship at sea edward moran.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Audio\Lefthand.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

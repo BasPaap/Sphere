@@ -35,5 +35,8 @@
     <Setting Name="SphereRadius" Type="System.Single" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
+    <Setting Name="VisionsFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Images</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -31,9 +31,9 @@
         <shaders:UnderwaterWithTransparencyEffect x:Key="UnderwaterWithTransparencyEffect" Timer="0" VerticalTroughWidth="0" Wobble2="0" Refracton="200" />
 
         <localconverters:VisionTypeToBitmapImageConverter x:Key="VisionTypeToBitmapImageConverter" />
-        
+        <localconverters:FileNameToBitmapImageConverter x:Key="FileNameToBitmapImageConverter" />
 	</UserControl.Resources>
     <Grid>
-        <Image Source="{Binding Type, ElementName=LayoutRoot, Converter={StaticResource VisionTypeToBitmapImageConverter}}" Effect="{StaticResource UnderwaterWithTransparencyEffect}" />        
+        <Image Source="{Binding FileName, ElementName=LayoutRoot, Converter={StaticResource FileNameToBitmapImageConverter}}" Effect="{StaticResource UnderwaterWithTransparencyEffect}" />        
     </Grid>
 </UserControl>

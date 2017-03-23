@@ -153,5 +153,17 @@ namespace Bas.Sphere.Properties {
                 this["SphereRadius"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Images")]
+        public string VisionsFolder {
+            get {
+                return ((string)(this["VisionsFolder"]));
+            }
+            set {
+                this["VisionsFolder"] = value;
+            }
+        }
     }
 }

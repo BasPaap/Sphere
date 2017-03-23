@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using Bas.Sphere.Extensions;
 using System.Diagnostics;
+using System.IO;
 
 namespace Bas.Sphere.HandTracking
 {
@@ -22,7 +23,10 @@ namespace Bas.Sphere.HandTracking
         private bool isSelectingVision = false;
         private VisionType[] availableVisionTypes = new VisionType[] { VisionType.Death, VisionType.Treasure, VisionType.Travel };
         private int currentVisionTypeIndex = 0;
-        
+
+        private List<string> visionFileNames = new List<string>();
+        private int currentVisionIndex = 0;
+
         public Hands()
         {
             this.timer.Interval = TimeSpan.FromSeconds(1.0 / 30.0);
@@ -32,6 +36,13 @@ namespace Bas.Sphere.HandTracking
             {
                 Settings.Default.SphereCenter = Vector.Zero;
             }
+
+            visionFileNames.AddRange(GetVisionFileNames());
+        }
+
+        private IEnumerable<string> GetVisionFileNames()
+        {
+            return Directory.EnumerateFiles(Path.Combine(Environment.CurrentDirectory, Properties.Settings.Default.VisionsFolder), "*.png").OrderBy(f => f);
         }
 
         private int currentHandlessFrameCount = 0;
@@ -150,15 +161,15 @@ namespace Bas.Sphere.HandTracking
                             {
                                 // Right hand is crossed over left.
                                 // We use this gesture to select the next vision. 
-                                this.currentVisionTypeIndex = (this.currentVisionTypeIndex < this.availableVisionTypes.Length - 1) ? this.currentVisionTypeIndex + 1 : 0;
-                                Debug.WriteLine("{0}\tHands crossed right over left, selected vision {1}", DateTime.Now.ToLongTimeString(), this.currentVisionTypeIndex);
+                                this.currentVisionIndex = (this.currentVisionIndex < this.visionFileNames.Count - 1) ? this.currentVisionIndex + 1 : 0;
+                                Debug.WriteLine("{0}\tHands crossed right over left, selected vision {1}", DateTime.Now.ToLongTimeString(), this.visionFileNames[this.currentVisionIndex]);
                             }
                             else
                             {
                                 // Left hand is crossed over right.
                                 // We use this gesture to reset the vision to the first one.
-                                this.currentVisionTypeIndex = 0;
-                                Debug.WriteLine("{0}\tHands crossed left over right, reset vision to {1}", DateTime.Now.ToLongTimeString(), this.currentVisionTypeIndex);
+                                this.currentVisionIndex = 0;
+                                Debug.WriteLine("{0}\tHands crossed left over right, reset vision to {1}", DateTime.Now.ToLongTimeString(), this.visionFileNames[this.currentVisionIndex]);
                             }
                         }
                     }
@@ -185,13 +196,13 @@ namespace Bas.Sphere.HandTracking
                 frame.Hands[0].PalmNormal.DistanceTo(Vector.Up) < 1.0f &&
                 frame.Hands[1].PalmNormal.DistanceTo(Vector.Up) < 1.0f)
             {
-                if (this.currentVisionTypeIndex >= this.availableVisionTypes.Length)
+                if (this.currentVisionIndex >= this.visionFileNames.Count)
                 {
                     // Just to make sure we don't go out of bounds.
-                    this.currentVisionTypeIndex = 0;
+                    this.currentVisionIndex = 0;
                 }
 
-                VisionSummoned(this, new VisionSummonedEventArgs(this.availableVisionTypes[this.currentVisionTypeIndex]));
+                VisionSummoned(this, new VisionSummonedEventArgs(this.visionFileNames[this.currentVisionIndex]));
             }
         }
 

@@ -92,6 +92,19 @@ namespace Bas.Sphere
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(VisionType), typeof(Vision), new PropertyMetadata(VisionType.None));
 
+
+
+        public string FileName
+        {
+            get { return (string)GetValue(FileNameProperty); }
+            set { SetValue(FileNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileNameProperty =
+            DependencyProperty.Register("FileName", typeof(string), typeof(Vision), new PropertyMetadata(null));
+        
+
         private void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
         {
             if (PropertyChanged != null)
