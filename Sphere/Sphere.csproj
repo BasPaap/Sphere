@@ -152,7 +152,9 @@
     <Resource Include="Images\starburst3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\skull holbein.png" />
+    <Content Include="Images\skull holbein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ShaderEffects\BarrelDistortionEffect.ps" />
@@ -189,7 +191,9 @@
     <Content Include="Audio\vision.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\treasure.png" />
+    <Content Include="Images\treasure.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\logo.png" />
     <Content Include="Leap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
