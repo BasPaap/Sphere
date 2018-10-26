@@ -1,8 +1,10 @@
 ﻿using Bas.Sphere.ShaderEffects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -40,6 +42,9 @@ namespace Bas.Sphere
 
             this.visionMediaPlayer = new MediaPlayer();
             this.visionMediaPlayer.Open(new Uri("pack://siteoforigin:,,,/Audio/vision.wav"));
+
+            FileNames = new Collection<string>(Directory.EnumerateFiles(System.IO.Path.Combine(Environment.CurrentDirectory, Properties.Settings.Default.VisionsFolder), "*.png").OrderBy(f => f).ToList());
+            FileName = FileNames.First();
         }
         
         private UnderwaterWithTransparencyEffect underwaterWithTransparencyEffect;
@@ -91,9 +96,7 @@ namespace Bas.Sphere
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(VisionType), typeof(Vision), new PropertyMetadata(VisionType.None));
-
-
-
+               
         public string FileName
         {
             get { return (string)GetValue(FileNameProperty); }
@@ -103,7 +106,17 @@ namespace Bas.Sphere
         // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FileNameProperty =
             DependencyProperty.Register("FileName", typeof(string), typeof(Vision), new PropertyMetadata(null));
-        
+               
+        public Collection<string> FileNames
+            {
+            get { return (Collection<string>)GetValue(FileNamesProperty); }
+            set { SetValue(FileNamesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FileNames.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileNamesProperty =
+            DependencyProperty.Register("FileNames", typeof(Collection<string>), typeof(Vision), new PropertyMetadata(null));
+
 
         private void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
         {

@@ -122,7 +122,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource VisionTypes}}" SelectedItem="{Binding Type, ElementName=Vision}" />
+                    <ComboBox Width="650" HorizontalAlignment="Left" ItemsSource="{Binding FileNames, ElementName=Vision}" SelectedItem="{Binding FileName, ElementName=Vision}" />
                     <Button Width="100" HorizontalAlignment="Left" Click="RevealVisionButton_Click">Toon visioen</Button>
                 </StackPanel>
 
